@@ -26,7 +26,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
             {t.couple.badge}
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+          <h2 className="font-script text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
             {t.couple.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />

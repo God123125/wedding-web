@@ -162,7 +162,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
         </div>
 
         {/* Romantic quote */}
-        <p className="max-w-xl text-base sm:text-lg text-[#5F354A] font-serif italic mb-10 leading-relaxed text-balance">
+        <p className="max-w-xl text-base sm:text-lg text-[#5F354A] font-khmer font-script italic mb-10 leading-relaxed text-balance">
           {t.hero.quote}
         </p>
 
