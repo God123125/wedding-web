@@ -1,0 +1,522 @@
+import React, { useState, useEffect } from "react";
+import {
+  Heart,
+  Send,
+  CheckCircle2,
+  Users,
+  Mail,
+  User,
+  MessageSquare,
+  Utensils,
+  Sparkles,
+  ListFilter,
+  Download,
+  X,
+} from "lucide-react";
+import { RsvpSubmission } from "../types/wedding";
+
+interface RsvpSectionProps {
+  weddingDate: string;
+}
+
+export const RsvpSection: React.FC<RsvpSectionProps> = ({ weddingDate }) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [guestCount, setGuestCount] = useState(1);
+  const [attendance, setAttendance] = useState<"accept" | "decline">("accept");
+  const [dietary, setDietary] = useState("Standard / No Restrictions");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submissions, setSubmissions] = useState<RsvpSubmission[]>([]);
+  const [showSubmissionsModal, setShowSubmissionsModal] = useState(false);
+
+  // Load submissions from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("wedding_rsvp_submissions");
+      if (stored) {
+        setSubmissions(JSON.parse(stored));
+      }
+    } catch {
+      // LocalStorage access fallback
+    }
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!fullName.trim() || !email.trim()) return;
+
+    setIsSubmitting(true);
+
+    const newSubmission: RsvpSubmission = {
+      id: Date.now().toString(),
+      fullName: fullName.trim(),
+      email: email.trim(),
+      guestCount: attendance === "accept" ? guestCount : 0,
+      attendance,
+      dietary: attendance === "accept" ? dietary : undefined,
+      message: message.trim() || undefined,
+      submittedAt: new Date().toISOString(),
+    };
+
+    setTimeout(() => {
+      const updated = [newSubmission, ...submissions];
+      setSubmissions(updated);
+      try {
+        localStorage.setItem(
+          "wedding_rsvp_submissions",
+          JSON.stringify(updated),
+        );
+      } catch {
+        // ignore
+      }
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    }, 600);
+  };
+
+  const handleResetForm = () => {
+    setFullName("");
+    setEmail("");
+    setGuestCount(1);
+    setAttendance("accept");
+    setDietary("Standard / No Restrictions");
+    setMessage("");
+    setIsSubmitted(false);
+  };
+
+  const exportCsv = () => {
+    if (submissions.length === 0) return;
+    const headers = [
+      "Full Name",
+      "Email",
+      "Attendance",
+      "Guest Count",
+      "Dietary",
+      "Message",
+      "Date",
+    ];
+    const rows = submissions.map((s) => [
+      `"${s.fullName}"`,
+      `"${s.email}"`,
+      s.attendance,
+      s.guestCount,
+      `"${s.dietary || ""}"`,
+      `"${s.message || ""}"`,
+      `"${new Date(s.submittedAt).toLocaleDateString()}"`,
+    ]);
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute(
+      "download",
+      `wedding-rsvp-list-${new Date().toISOString().slice(0, 10)}.csv`,
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <section
+      id="rsvp"
+      className="py-24 px-6 relative bg-gradient-to-b from-[#FFF9FA] via-[#FFF0F4] to-white overflow-hidden"
+    >
+      {/* Decorative floral circles */}
+      <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-[#F9CAD8]/20 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full bg-[#FCE7ED]/30 blur-3xl pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center max-w-xl mx-auto mb-14">
+          <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
+            Kindly Respond
+          </span>
+          <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+            RSVP
+          </h2>
+          <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
+          <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
+            Please let us know whether you will be celebrating with us by{" "}
+            <strong className="font-medium text-[#2D1522]">May 15, 2026</strong>
+            .
+          </p>
+        </div>
+
+        {/* RSVP Card */}
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#FCE7ED] shadow-md relative">
+          {isSubmitted ? (
+            /* Success State */
+            <div className="text-center py-10 px-4 animate-in fade-in zoom-in-95 duration-500">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FFF0F4] to-[#FCE7ED] border border-[#F9CAD8] mx-auto flex items-center justify-center text-[#D13F72] mb-6 shadow-xs">
+                <Heart className="w-10 h-10 fill-[#D13F72] animate-bounce" />
+              </div>
+
+              <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold block mb-2">
+                Response Received
+              </span>
+              <h3 className="font-serif text-3xl sm:text-4xl text-[#2D1522] mb-4 font-normal">
+                Thank you for celebrating our special day with us! ❤️
+              </h3>
+              <p className="text-sm sm:text-base text-[#713F5B] max-w-md mx-auto mb-8 font-light leading-relaxed">
+                {attendance === "accept"
+                  ? `We are overjoyed to welcome ${fullName} and your party of ${guestCount}. We look forward to creating unforgettable memories together!`
+                  : `Dear ${fullName}, thank you for letting us know. You will be dearly missed, and we carry your blessings in our hearts.`}
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <button
+                  onClick={handleResetForm}
+                  className="px-6 py-2.5 rounded-full text-xs font-medium tracking-wide text-[#713F5B] bg-[#FFF0F4] hover:bg-[#FCE7ED] border border-[#FCE7ED] transition-colors"
+                >
+                  Submit Another Response
+                </button>
+
+                {submissions.length > 0 && (
+                  <button
+                    onClick={() => setShowSubmissionsModal(true)}
+                    className="px-6 py-2.5 rounded-full text-xs font-medium tracking-wide text-[#9D174D] hover:underline flex items-center gap-1.5"
+                  >
+                    <ListFilter className="w-3.5 h-3.5" />
+                    <span>View Guest List ({submissions.length})</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          ) : (
+            /* Interactive Form */
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Attendance Selection */}
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-3">
+                  Will You Be Attending? *
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setAttendance("accept")}
+                    className={`p-4 rounded-2xl border text-left flex items-center justify-between transition-all duration-200 ${
+                      attendance === "accept"
+                        ? "border-[#D13F72] bg-gradient-to-r from-[#FFF0F4] to-[#FCE7ED]/40 text-[#2D1522] shadow-xs ring-1 ring-[#D13F72]"
+                        : "border-[#FCE7ED] bg-white text-[#5F354A] hover:bg-[#FFF9FA]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-6 h-6 rounded-full flex items-center justify-center border transition-colors ${
+                          attendance === "accept"
+                            ? "border-[#D13F72] bg-[#D13F72] text-white"
+                            : "border-slate-300 bg-white"
+                        }`}
+                      >
+                        {attendance === "accept" && (
+                          <CheckCircle2 className="w-4 h-4 fill-white text-[#D13F72]" />
+                        )}
+                      </div>
+                      <div>
+                        <span className="font-serif text-lg font-medium block">
+                          Joyfully Accept
+                        </span>
+                        <span className="text-[11px] text-[#713F5B]">
+                          Can&apos;t wait to celebrate!
+                        </span>
+                      </div>
+                    </div>
+                    <Heart
+                      className={`w-4 h-4 ${attendance === "accept" ? "fill-[#D13F72] text-[#D13F72]" : "text-slate-300"}`}
+                    />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setAttendance("decline")}
+                    className={`p-4 rounded-2xl border text-left flex items-center justify-between transition-all duration-200 ${
+                      attendance === "decline"
+                        ? "border-[#D13F72] bg-gradient-to-r from-[#FFF0F4] to-[#FCE7ED]/40 text-[#2D1522] shadow-xs ring-1 ring-[#D13F72]"
+                        : "border-[#FCE7ED] bg-white text-[#5F354A] hover:bg-[#FFF9FA]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div
+                        className={`w-6 h-6 rounded-full flex items-center justify-center border transition-colors ${
+                          attendance === "decline"
+                            ? "border-[#D13F72] bg-[#D13F72] text-white"
+                            : "border-slate-300 bg-white"
+                        }`}
+                      >
+                        {attendance === "decline" && (
+                          <CheckCircle2 className="w-4 h-4 fill-white text-[#D13F72]" />
+                        )}
+                      </div>
+                      <div>
+                        <span className="font-serif text-lg font-medium block">
+                          Regretfully Decline
+                        </span>
+                        <span className="text-[11px] text-[#713F5B]">
+                          Will be celebrating in spirit
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Name & Email Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label
+                    htmlFor="rsvp-fullname"
+                    className="block text-xs font-semibold uppercase tracking-wider text-[#5F354A] mb-1.5"
+                  >
+                    Full Name *
+                  </label>
+                  <div className="relative">
+                    <User className="w-4 h-4 text-[#D13F72] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      id="rsvp-fullname"
+                      type="text"
+                      required
+                      placeholder="e.g. Eleanor Vance"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-[#FCE7ED] focus:border-[#D13F72] focus:ring-2 focus:ring-[#F9CAD8] bg-[#FFF9FA]/60 text-sm text-[#2D1522] placeholder:text-[#A07086] outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="rsvp-email"
+                    className="block text-xs font-semibold uppercase tracking-wider text-[#5F354A] mb-1.5"
+                  >
+                    Email Address *
+                  </label>
+                  <div className="relative">
+                    <Mail className="w-4 h-4 text-[#D13F72] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      id="rsvp-email"
+                      type="email"
+                      required
+                      placeholder="eleanor@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-[#FCE7ED] focus:border-[#D13F72] focus:ring-2 focus:ring-[#F9CAD8] bg-[#FFF9FA]/60 text-sm text-[#2D1522] placeholder:text-[#A07086] outline-none transition-all"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Guest Count & Dietary (only relevant if accepting) */}
+              {attendance === "accept" && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-1 animate-in fade-in duration-300">
+                  <div>
+                    <label
+                      htmlFor="rsvp-guestcount"
+                      className="block text-xs font-semibold uppercase tracking-wider text-[#5F354A] mb-1.5"
+                    >
+                      Number of Guests (Including You)
+                    </label>
+                    <div className="relative">
+                      <Users className="w-4 h-4 text-[#D13F72] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select
+                        id="rsvp-guestcount"
+                        value={guestCount}
+                        onChange={(e) => setGuestCount(Number(e.target.value))}
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-[#FCE7ED] focus:border-[#D13F72] focus:ring-2 focus:ring-[#F9CAD8] bg-[#FFF9FA]/60 text-sm text-[#2D1522] outline-none transition-all cursor-pointer"
+                      >
+                        <option value={1}>1 Guest (Just me)</option>
+                        <option value={2}>2 Guests (Me + Plus One)</option>
+                        <option value={3}>3 Guests</option>
+                        <option value={4}>4 Guests</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="rsvp-dietary"
+                      className="block text-xs font-semibold uppercase tracking-wider text-[#5F354A] mb-1.5"
+                    >
+                      Dietary Preferences
+                    </label>
+                    <div className="relative">
+                      <Utensils className="w-4 h-4 text-[#D13F72] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <select
+                        id="rsvp-dietary"
+                        value={dietary}
+                        onChange={(e) => setDietary(e.target.value)}
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-[#FCE7ED] focus:border-[#D13F72] focus:ring-2 focus:ring-[#F9CAD8] bg-[#FFF9FA]/60 text-sm text-[#2D1522] outline-none transition-all cursor-pointer"
+                      >
+                        <option value="Standard / No Restrictions">
+                          Standard / No Restrictions
+                        </option>
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Gluten-Free">Gluten-Free</option>
+                        <option value="Nut Allergy / Other">
+                          Nut Allergy / Other
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Message for the Couple */}
+              <div>
+                <label
+                  htmlFor="rsvp-message"
+                  className="block text-xs font-semibold uppercase tracking-wider text-[#5F354A] mb-1.5"
+                >
+                  A Note for the Couple (Optional)
+                </label>
+                <div className="relative">
+                  <MessageSquare className="w-4 h-4 text-[#D13F72] absolute left-3.5 top-3.5 pointer-events-none" />
+                  <textarea
+                    id="rsvp-message"
+                    rows={3}
+                    placeholder="Share a sweet memory, advice, or song request..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-[#FCE7ED] focus:border-[#D13F72] focus:ring-2 focus:ring-[#F9CAD8] bg-[#FFF9FA]/60 text-sm text-[#2D1522] placeholder:text-[#A07086] outline-none transition-all resize-none"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-2 text-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto min-w-[240px] px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-[#D13F72] via-[#BE185D] to-[#9D174D] shadow-md hover:shadow-lg hover:scale-102 active:scale-98 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Sparkles className="w-4 h-4 animate-spin" />
+                      <span>Sending RSVP...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Send RSVP</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+
+          {/* Submissions count link */}
+          {submissions.length > 0 && !isSubmitted && (
+            <div className="mt-8 pt-6 border-t border-[#FCE7ED]/60 flex items-center justify-between text-xs text-[#713F5B]">
+              <span>{submissions.length} guest response(s) logged</span>
+              <button
+                type="button"
+                onClick={() => setShowSubmissionsModal(true)}
+                className="text-[#9D174D] hover:underline font-medium flex items-center gap-1"
+              >
+                <ListFilter className="w-3.5 h-3.5" />
+                <span>Guest List</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Guest List Modal */}
+      {showSubmissionsModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setShowSubmissionsModal(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-3xl max-w-2xl w-full max-h-[80vh] flex flex-col overflow-hidden shadow-2xl border border-[#FCE7ED]"
+          >
+            <div className="p-6 bg-[#FFF0F4] border-b border-[#FCE7ED] flex items-center justify-between">
+              <div>
+                <h3 className="font-serif text-2xl font-medium text-[#2D1522]">
+                  RSVP Guest Responses
+                </h3>
+                <p className="text-xs text-[#713F5B] mt-0.5">
+                  Total logged: {submissions.length} | Attending:{" "}
+                  {submissions
+                    .filter((s) => s.attendance === "accept")
+                    .reduce((acc, s) => acc + s.guestCount, 0)}{" "}
+                  guests
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={exportCsv}
+                  className="p-2 rounded-full bg-white hover:bg-[#FCE7ED] text-[#D13F72] transition-colors border border-[#FCE7ED]"
+                  title="Export to CSV"
+                >
+                  <Download className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setShowSubmissionsModal(false)}
+                  className="p-2 rounded-full hover:bg-white/80 text-[#713F5B] transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6 overflow-y-auto divide-y divide-[#FCE7ED]">
+              {submissions.length === 0 ? (
+                <p className="text-sm text-center text-[#713F5B] py-8">
+                  No RSVPs submitted yet.
+                </p>
+              ) : (
+                submissions.map((item) => (
+                  <div key={item.id} className="py-4 first:pt-0 last:pb-0">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-sm text-[#2D1522]">
+                        {item.fullName}
+                      </span>
+                      <span
+                        className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${
+                          item.attendance === "accept"
+                            ? "bg-emerald-50 text-emerald-700"
+                            : "bg-rose-50 text-rose-700"
+                        }`}
+                      >
+                        {item.attendance === "accept"
+                          ? `Attending (${item.guestCount})`
+                          : "Declined"}
+                      </span>
+                    </div>
+
+                    <div className="text-xs text-[#713F5B] mt-1 flex flex-wrap gap-2">
+                      <span>{item.email}</span>
+                      {item.dietary && (
+                        <>
+                          <span>·</span>
+                          <span>{item.dietary}</span>
+                        </>
+                      )}
+                    </div>
+
+                    {item.message && (
+                      <p className="text-xs text-[#5F354A] mt-2 italic bg-[#FFF9FA] p-2.5 rounded-xl border border-[#FCE7ED]/50">
+                        &ldquo;{item.message}&rdquo;
+                      </p>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
