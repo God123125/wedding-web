@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Heart, Settings2 } from "lucide-react";
+import { Menu, X, Settings2 } from "lucide-react";
 import { AudioPlayer } from "./AudioPlayer";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface NavbarProps {
   groomName: string;
@@ -15,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +28,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { label: "Our Story", href: "#story" },
-    { label: "The Couple", href: "#couple" },
-    { label: "Ceremony", href: "#ceremony" },
-    { label: "Moments", href: "#gallery" },
-    { label: "Gift", href: "#gift" },
+    { label: t.nav.story, href: "#story" },
+    { label: t.nav.couple, href: "#couple" },
+    { label: t.nav.ceremony, href: "#ceremony" },
+    { label: t.nav.schedule, href: "#events" },
+    { label: t.nav.moments, href: "#gallery" },
+    { label: t.nav.gifts, href: "#gift" },
   ];
 
   const handleNavClick = (
@@ -48,8 +52,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-white/85 backdrop-blur-md shadow-xs border-b border-[#FCE7ED]/80 py-3.5"
-          : "bg-gradient-to-b from-white/70 to-transparent py-5"
+          ? "bg-white/90 backdrop-blur-md shadow-xs border-b border-[#FCE7ED]/80 py-3.5"
+          : "bg-gradient-to-b from-white/75 to-transparent py-5"
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
@@ -66,8 +70,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span>{brideName.split(" ")[0]}</span>
         </a>
 
-        {/* Zone 2: 4-6 clean text navigation links */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#5F354A]">
+        {/* Zone 2: Clean text navigation links */}
+        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-[#5F354A]">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -80,16 +84,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Zone 3: 1-2 primary actions */}
-        <div className="flex items-center gap-3">
+        {/* Zone 3: Actions + Language Toggle */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Language Toggle */}
+          <LanguageToggle />
+
           <AudioPlayer />
 
           {onOpenCustomizer && (
             <button
               onClick={onOpenCustomizer}
               className="p-2 text-[#713F5B] hover:text-[#9D174D] hover:bg-[#FCE7ED]/50 rounded-full transition-colors hidden sm:flex items-center justify-center"
-              title="Edit wedding details"
-              aria-label="Customize details"
+              title={t.nav.customize}
+              aria-label={t.nav.customize}
             >
               <Settings2 className="w-4 h-4" />
             </button>
@@ -100,13 +107,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => handleNavClick(e, "#rsvp")}
             className="px-4 py-2 text-xs font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] rounded-full shadow-xs hover:shadow-md transition-all duration-300 whitespace-nowrap active:scale-95"
           >
-            RSVP
+            {t.nav.rsvp}
           </a>
 
           {/* Mobile hamburger button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-[#5F354A] hover:text-[#9D174D] md:hidden focus:outline-none"
+            className="p-2 text-[#5F354A] hover:text-[#9D174D] lg:hidden focus:outline-none"
             aria-label="Toggle mobile menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -121,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-[#FCE7ED] px-6 py-6 shadow-lg animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-b border-[#FCE7ED] px-6 py-6 shadow-lg animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex flex-col gap-4 text-center">
             {navLinks.map((link) => (
               <a
@@ -134,7 +141,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               </a>
             ))}
 
-            <div className="pt-2 flex items-center justify-center gap-4">
+            <div className="pt-2 flex flex-col items-center gap-3">
+              <LanguageToggle />
+
               {onOpenCustomizer && (
                 <button
                   onClick={() => {
@@ -144,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="flex items-center gap-2 text-xs text-[#713F5B] py-2 px-4 rounded-full bg-[#FFF0F4] border border-[#FCE7ED]"
                 >
                   <Settings2 className="w-3.5 h-3.5" />
-                  Customize Details
+                  {t.nav.customize}
                 </button>
               )}
             </div>

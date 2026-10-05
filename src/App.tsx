@@ -10,6 +10,8 @@ import { RsvpSection } from "./components/RsvpSection";
 import { WeddingGiftSection } from "./components/WeddingGiftSection";
 import { ClosingSection } from "./components/ClosingSection";
 import { CustomizeDrawer } from "./components/CustomizeDrawer";
+import { LanguageToggle } from "./components/LanguageToggle";
+import { LanguageProvider, useLanguage } from "./i18n/LanguageContext";
 import {
   CoupleInfo,
   TimelineMilestone,
@@ -26,13 +28,14 @@ import {
 } from "./data/initialData";
 import { SlidersHorizontal } from "lucide-react";
 
-export default function App() {
+function WeddingAppContent() {
   const [couple, setCouple] = useState<CoupleInfo>(initialCoupleInfo);
   const [milestones] = useState<TimelineMilestone[]>(initialMilestones);
   const [events] = useState<WeddingEvent[]>(initialEvents);
   const [gallery] = useState<GalleryPhoto[]>(initialGallery);
   const [gift] = useState<GiftDetails>(initialGiftDetails);
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
+  const { t } = useLanguage();
 
   // Restore customized wedding details from localStorage if previously edited
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFF8F9] text-[#2E1824] relative selection:bg-[#FCE7ED] selection:text-[#831843]">
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar with Language Switcher */}
       <Navbar
         groomName={couple.groomName}
         brideName={couple.brideName}
@@ -61,7 +64,7 @@ export default function App() {
       {/* The Couple Section */}
       <CoupleSection couple={couple} />
 
-      {/* Love Story Timeline (with subtle floating hearts) */}
+      {/* Love Story Timeline */}
       <LoveStoryTimeline milestones={milestones} />
 
       {/* The Wedding Ceremony Section */}
@@ -82,15 +85,17 @@ export default function App() {
       {/* Closing Section */}
       <ClosingSection couple={couple} />
 
-      {/* Floating Action Button to Customize Wedding details */}
-      <div className="fixed bottom-4 right-4 z-40">
+      {/* Bottom Floating Actions: Language Switch & Customize details */}
+      <div className="fixed bottom-4 right-4 z-40 flex items-center gap-2">
+        <LanguageToggle variant="floating" />
+
         <button
           onClick={() => setIsCustomizerOpen(true)}
-          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-white/90 backdrop-blur-md border border-[#FCE7ED] shadow-md hover:shadow-lg text-[#9D174D] hover:text-[#831843] hover:bg-white transition-all text-xs font-medium active:scale-95 group"
-          title="Customize Names, Date & Details"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#FCE7ED] shadow-sm hover:shadow-md text-[#9D174D] hover:text-[#831843] hover:bg-white transition-all text-xs font-medium active:scale-95 group"
+          title={t.customizer.title}
         >
           <SlidersHorizontal className="w-3.5 h-3.5 text-[#D13F72] group-hover:rotate-45 transition-transform" />
-          <span className="hidden sm:inline">Customize Details</span>
+          <span className="hidden sm:inline">{t.nav.customize}</span>
         </button>
       </div>
 
@@ -102,5 +107,13 @@ export default function App() {
         onUpdateCouple={setCouple}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <WeddingAppContent />
+    </LanguageProvider>
   );
 }

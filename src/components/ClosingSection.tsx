@@ -1,14 +1,17 @@
 import React from "react";
 import { Heart, Sparkles } from "lucide-react";
 import { CoupleInfo } from "../types/wedding";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface ClosingSectionProps {
   couple: CoupleInfo;
 }
 
 export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
+  const { t, language } = useLanguage();
+
   const formattedDate = new Date(couple.weddingDate).toLocaleDateString(
-    "en-US",
+    language === "km" ? "km-KH" : "en-US",
     {
       month: "long",
       day: "numeric",
@@ -50,7 +53,9 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
 
         {/* Romantic Anchor Statement */}
         <p className="font-serif text-xl sm:text-2xl text-[#831843] italic mb-6">
-          &ldquo;Together is our favorite place to be.&rdquo;
+          {language === "km"
+            ? "«នៅជាមួយគ្នា គឺជាកន្លែងដែលយើងស្រឡាញ់បំផុត»"
+            : "“Together is our favorite place to be.”"}
         </p>
 
         {/* Wedding Date */}
@@ -62,9 +67,7 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
 
         {/* Final Thank You Note */}
         <p className="text-sm text-[#713F5B] max-w-lg leading-relaxed mb-12 font-light">
-          Thank you from the bottom of our hearts for being part of our love
-          story, our celebration, and our new chapter together. With all our
-          love and gratitude.
+          {t.closing.subheading}
         </p>
 
         {/* Scroll back to top link */}
@@ -72,7 +75,7 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
           onClick={scrollToTop}
           className="text-xs tracking-wider uppercase font-semibold text-[#9D174D] hover:text-[#D13F72] hover:underline transition-colors pb-8"
         >
-          Back to Top ↑
+          {t.closing.backToTop} ↑
         </button>
 
         {/* Clean copyright footer */}

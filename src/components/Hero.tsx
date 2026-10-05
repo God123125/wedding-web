@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Heart, Calendar, ChevronDown, Sparkles } from "lucide-react";
 import { CoupleInfo } from "../types/wedding";
 import { HeroHearts } from "./HeroHearts";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface HeroProps {
   couple: CoupleInfo;
@@ -15,6 +16,7 @@ interface TimeRemaining {
 }
 
 export const Hero: React.FC<HeroProps> = ({ couple }) => {
+  const { t, language } = useLanguage();
   const [timeLeft, setTimeLeft] = useState<TimeRemaining>({
     days: 0,
     hours: 0,
@@ -78,7 +80,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
   };
 
   const formattedDate = new Date(couple.weddingDate).toLocaleDateString(
-    "en-US",
+    language === "km" ? "km-KH" : "en-US",
     {
       weekday: "long",
       year: "numeric",
@@ -126,10 +128,10 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
-        {/* Subtle romantic tagline */}
+        {/* Romantic tagline */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 border border-[#FCE7ED] shadow-2xs mb-6 text-xs font-medium tracking-widest uppercase text-[#9D174D]">
           <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
-          <span>We&apos;re Getting Married!</span>
+          <span>{t.hero.tagline}</span>
           <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
         </div>
 
@@ -161,9 +163,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
 
         {/* Romantic quote */}
         <p className="max-w-xl text-base sm:text-lg text-[#5F354A] font-serif italic mb-10 leading-relaxed text-balance">
-          &ldquo;When you realize you want to spend the rest of your life with
-          somebody, you want the rest of your life to start as soon as
-          possible.&rdquo;
+          {t.hero.quote}
         </p>
 
         {/* Primary Action Buttons */}
@@ -173,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
             className="px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-[#D13F72] via-[#BE185D] to-[#9D174D] shadow-md hover:shadow-lg hover:scale-102 active:scale-98 transition-all duration-300 flex items-center gap-2.5"
           >
             <Heart className="w-4 h-4 fill-white" />
-            <span>Our Love Story</span>
+            <span>{t.hero.loveStoryBtn}</span>
           </button>
 
           <button
@@ -182,7 +182,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
             title="Add wedding to Google Calendar"
           >
             <Calendar className="w-4 h-4 text-[#D13F72]" />
-            <span>Save The Date</span>
+            <span>{t.hero.saveTheDateBtn}</span>
           </button>
         </div>
 
@@ -190,7 +190,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
         <div className="w-full max-w-2xl bg-white/70 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-[#FCE7ED] shadow-xs">
           <div className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-6 flex items-center justify-center gap-2">
             <span className="w-8 h-[1px] bg-[#F9CAD8]" />
-            <span>Counting Down to Forever</span>
+            <span>{t.hero.countdownTitle}</span>
             <span className="w-8 h-[1px] bg-[#F9CAD8]" />
           </div>
 
@@ -200,7 +200,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
                 {String(timeLeft.days).padStart(2, "0")}
               </span>
               <span className="text-[11px] sm:text-xs tracking-wider uppercase text-[#713F5B] mt-1">
-                Days
+                {t.hero.days}
               </span>
             </div>
 
@@ -209,7 +209,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
                 {String(timeLeft.hours).padStart(2, "0")}
               </span>
               <span className="text-[11px] sm:text-xs tracking-wider uppercase text-[#713F5B] mt-1">
-                Hours
+                {t.hero.hours}
               </span>
             </div>
 
@@ -218,7 +218,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
                 {String(timeLeft.minutes).padStart(2, "0")}
               </span>
               <span className="text-[11px] sm:text-xs tracking-wider uppercase text-[#713F5B] mt-1">
-                Minutes
+                {t.hero.minutes}
               </span>
             </div>
 
@@ -227,7 +227,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
                 {String(timeLeft.seconds).padStart(2, "0")}
               </span>
               <span className="text-[11px] sm:text-xs tracking-wider uppercase text-[#713F5B] mt-1">
-                Seconds
+                {t.hero.seconds}
               </span>
             </div>
           </div>
@@ -240,7 +240,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
           aria-label="Scroll to couple introduction"
         >
           <span className="text-xs tracking-widest uppercase font-medium">
-            Meet The Couple
+            {t.hero.meetCouple}
           </span>
           <ChevronDown className="w-4 h-4 animate-bounce group-hover:translate-y-0.5 transition-transform" />
         </button>

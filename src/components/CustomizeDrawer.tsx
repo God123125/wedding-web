@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { X, RotateCcw, Check, Sparkles, Heart } from "lucide-react";
 import { CoupleInfo } from "../types/wedding";
 import { initialCoupleInfo } from "../data/initialData";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface CustomizeDrawerProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 }) => {
   const [formData, setFormData] = useState<CoupleInfo>(couple);
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const { t, language } = useLanguage();
 
   if (!isOpen) return null;
 
@@ -73,10 +75,10 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
               </div>
               <div>
                 <h3 className="font-serif text-xl font-medium text-[#2D1522]">
-                  Customize Wedding Details
+                  {t.customizer.title}
                 </h3>
                 <p className="text-xs text-[#713F5B]">
-                  Personalize names, date, venue &amp; stories live
+                  {t.customizer.description}
                 </p>
               </div>
             </div>
@@ -99,7 +101,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                  Groom Name
+                  {t.customizer.groomName}
                 </label>
                 <input
                   type="text"
@@ -111,7 +113,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
               <div>
                 <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                  Bride Name
+                  {t.customizer.brideName}
                 </label>
                 <input
                   type="text"
@@ -125,7 +127,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                  Wedding Date (ISO)
+                  {t.customizer.weddingDate}
                 </label>
                 <input
                   type="datetime-local"
@@ -137,7 +139,9 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
               <div>
                 <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                  Dress Code
+                  {language === "km"
+                    ? "ការស្លៀកពាក់ (Dress Code)"
+                    : "Dress Code"}
                 </label>
                 <input
                   type="text"
@@ -150,7 +154,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
             <div>
               <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                Venue Name
+                {t.customizer.venueName}
               </label>
               <input
                 type="text"
@@ -162,7 +166,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
             <div>
               <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                Venue Address
+                {t.customizer.venueAddress}
               </label>
               <input
                 type="text"
@@ -174,7 +178,9 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
             <div>
               <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                Venue Note &amp; Valet Info
+                {language === "km"
+                  ? "ព័ត៌មានបន្ថែមអំពីទីតាំង"
+                  : "Venue Note & Valet Info"}
               </label>
               <textarea
                 rows={2}
@@ -186,7 +192,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
             <div>
               <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                Groom Bio / Quote
+                {language === "km" ? "សារកូនកំលោះ" : "Groom Bio / Quote"}
               </label>
               <textarea
                 rows={2}
@@ -198,7 +204,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
 
             <div>
               <label className="block uppercase font-semibold text-[#5F354A] mb-1">
-                Bride Bio / Quote
+                {language === "km" ? "សារកូនក្រមុំ" : "Bride Bio / Quote"}
               </label>
               <textarea
                 rows={2}
@@ -218,7 +224,7 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
             className="px-4 py-2.5 rounded-full text-xs font-medium text-[#713F5B] hover:bg-[#FFF0F4] border border-[#FCE7ED] transition-colors flex items-center gap-1.5"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset Defaults</span>
+            <span>{t.customizer.reset}</span>
           </button>
 
           <button
@@ -229,12 +235,12 @@ export const CustomizeDrawer: React.FC<CustomizeDrawerProps> = ({
             {savedSuccess ? (
               <>
                 <Check className="w-4 h-4" />
-                <span>Updated!</span>
+                <span>{language === "km" ? "បានរក្សាទុក!" : "Updated!"}</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Apply Changes</span>
+                <span>{t.customizer.save}</span>
               </>
             )}
           </button>

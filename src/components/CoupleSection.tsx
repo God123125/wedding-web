@@ -1,13 +1,16 @@
 import React from "react";
-import { Heart, Sparkles, Quote } from "lucide-react";
+import { Heart, Quote } from "lucide-react";
 import { CoupleInfo } from "../types/wedding";
 import { SafeImage } from "./SafeImage";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface CoupleSectionProps {
   couple: CoupleInfo;
 }
 
 export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
+  const { t, language } = useLanguage();
+
   return (
     <section
       id="couple"
@@ -21,15 +24,14 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
-            Forever &amp; Always
+            {t.couple.badge}
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
-            The Happy Couple
+            {t.couple.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
           <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
-            Two unique lives, two joyful hearts, and one beautiful journey
-            toward a shared forever.
+            {t.couple.subheading}
           </p>
         </div>
 
@@ -46,13 +48,13 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
                   alt={couple.groomName}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   fallbackTitle={couple.groomName}
-                  fallbackSubtitle="The Groom"
+                  fallbackSubtitle={t.couple.groomBadge}
                 />
               </div>
             </div>
 
             <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
-              {couple.groomTitle}
+              {language === "km" ? t.couple.groomBadge : couple.groomTitle}
             </span>
             <h3 className="font-serif text-3xl text-[#2D1522] mb-3 font-medium">
               {couple.groomName}
@@ -92,13 +94,13 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
                   alt={couple.brideName}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   fallbackTitle={couple.brideName}
-                  fallbackSubtitle="The Bride"
+                  fallbackSubtitle={t.couple.brideBadge}
                 />
               </div>
             </div>
 
             <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
-              {couple.brideTitle}
+              {language === "km" ? t.couple.brideBadge : couple.brideTitle}
             </span>
             <h3 className="font-serif text-3xl text-[#2D1522] mb-3 font-medium">
               {couple.brideName}

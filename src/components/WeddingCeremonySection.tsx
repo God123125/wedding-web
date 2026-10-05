@@ -10,6 +10,7 @@ import {
   Check,
 } from "lucide-react";
 import { CoupleInfo } from "../types/wedding";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface WeddingCeremonySectionProps {
   couple: CoupleInfo;
@@ -19,9 +20,10 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
   couple,
 }) => {
   const [copiedAddress, setCopiedAddress] = useState(false);
+  const { t, language } = useLanguage();
 
   const formattedDate = new Date(couple.weddingDate).toLocaleDateString(
-    "en-US",
+    language === "km" ? "km-KH" : "en-US",
     {
       weekday: "long",
       year: "numeric",
@@ -31,7 +33,7 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
   );
 
   const formattedTime = new Date(couple.weddingDate).toLocaleTimeString(
-    "en-US",
+    language === "km" ? "km-KH" : "en-US",
     {
       hour: "numeric",
       minute: "2-digit",
@@ -66,15 +68,14 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
-            Where &amp; When
+            {t.ceremony.badge}
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
-            The Wedding
+            {t.ceremony.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
           <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
-            We cannot wait to celebrate this sacred milestone surrounded by the
-            people who mean the world to us.
+            {t.ceremony.subheading}
           </p>
         </div>
 
@@ -85,7 +86,7 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
             <div className="lg:col-span-7 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#9D174D] mb-4">
                 <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
-                <span>The Main Ceremony &amp; Exchange of Vows</span>
+                <span>{t.ceremony.heading}</span>
               </div>
 
               <h3 className="font-serif text-3xl sm:text-4xl text-[#2D1522] font-medium mb-4">
@@ -107,7 +108,7 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                     <Clock className="w-4 h-4" />
                   </div>
                   <span className="text-sm sm:text-base font-medium text-[#2D1522]">
-                    {formattedTime} EST
+                    {formattedTime}
                   </span>
                 </div>
 
@@ -132,7 +133,7 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                   className="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] shadow-xs hover:shadow-md transition-all flex items-center gap-2"
                 >
                   <Navigation className="w-3.5 h-3.5" />
-                  <span>View Location</span>
+                  <span>{t.ceremony.getDirections}</span>
                   <ExternalLink className="w-3 h-3 opacity-80" />
                 </button>
 
@@ -143,12 +144,14 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                   {copiedAddress ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700">Address Copied!</span>
+                      <span className="text-emerald-700">
+                        {t.ceremony.addressCopied}
+                      </span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5 text-[#D13F72]" />
-                      <span>Copy Address</span>
+                      <span>{t.ceremony.copyAddress}</span>
                     </>
                   )}
                 </button>
@@ -158,7 +161,6 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
             {/* Right: Stylized Venue / Map Representation */}
             <div className="lg:col-span-5">
               <div className="relative rounded-2xl overflow-hidden border border-[#FCE7ED] shadow-sm bg-white aspect-4/3 flex flex-col items-center justify-center p-6 text-center group">
-                {/* Decorative Map Grid Pattern */}
                 <div
                   className="absolute inset-0 opacity-20 pointer-events-none"
                   style={{
@@ -183,15 +185,19 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                     onClick={handleOpenMap}
                     className="text-xs text-[#D13F72] font-semibold hover:underline inline-flex items-center gap-1.5"
                   >
-                    <span>Open in Google Maps</span>
+                    <span>{t.ceremony.getDirections}</span>
                     <ExternalLink className="w-3 h-3" />
                   </button>
                 </div>
 
                 {/* Subtitle tag for dress code */}
                 <div className="absolute bottom-3 left-3 right-3 text-center py-2 px-3 bg-white/90 backdrop-blur-xs rounded-xl border border-[#FCE7ED] text-[11px] text-[#713F5B]">
-                  <span className="font-medium text-[#9D174D]">Attire: </span>
-                  {couple.dressCode}
+                  <span className="font-medium text-[#9D174D]">
+                    {t.ceremony.dressCodeTitle}:{" "}
+                  </span>
+                  {language === "km"
+                    ? t.ceremony.dressCodeValue
+                    : couple.dressCode}
                 </div>
               </div>
             </div>

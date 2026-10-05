@@ -2,6 +2,7 @@ import React from "react";
 import { Heart, MapPin, Sparkles } from "lucide-react";
 import { TimelineMilestone } from "../types/wedding";
 import { SafeImage } from "./SafeImage";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface LoveStoryTimelineProps {
   milestones: TimelineMilestone[];
@@ -10,6 +11,56 @@ interface LoveStoryTimelineProps {
 export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
   milestones,
 }) => {
+  const { t, language } = useLanguage();
+
+  const getMilestoneData = (item: TimelineMilestone, index: number) => {
+    if (language !== "km") return item;
+    switch (index) {
+      case 0:
+        return {
+          ...item,
+          title: t.story.milestone1Title,
+          description: t.story.milestone1Desc,
+          date: t.story.milestone1Date,
+          location: t.story.milestone1Loc,
+        };
+      case 1:
+        return {
+          ...item,
+          title: t.story.milestone2Title,
+          description: t.story.milestone2Desc,
+          date: t.story.milestone2Date,
+          location: t.story.milestone2Loc,
+        };
+      case 2:
+        return {
+          ...item,
+          title: t.story.milestone3Title,
+          description: t.story.milestone3Desc,
+          date: t.story.milestone3Date,
+          location: t.story.milestone3Loc,
+        };
+      case 3:
+        return {
+          ...item,
+          title: t.story.milestone4Title,
+          description: t.story.milestone4Desc,
+          date: t.story.milestone4Date,
+          location: t.story.milestone4Loc,
+        };
+      case 4:
+        return {
+          ...item,
+          title: t.story.milestone5Title,
+          description: t.story.milestone5Desc,
+          date: t.story.milestone5Date,
+          location: t.story.milestone5Loc,
+        };
+      default:
+        return item;
+    }
+  };
+
   return (
     <section
       id="story"
@@ -19,7 +70,7 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
       <div className="absolute top-1/4 right-8 w-96 h-96 bg-[#F9CAD8]/25 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 left-8 w-96 h-96 bg-[#FCE7ED]/40 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Floating hearts along the left and right margins of the entire Love Story section */}
+      {/* Floating hearts along the left and right margins */}
       <div className="absolute top-28 left-6 md:left-12 pointer-events-none z-10 hidden sm:block">
         <div className="animate-float-bob flex flex-col items-center gap-2">
           <Heart className="w-7 h-7 fill-[#D13F72] text-[#D13F72] opacity-80 drop-shadow-md" />
@@ -38,9 +89,8 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
-        {/* Section Header with Signature Pulsing Heart (just like the footer) */}
+        {/* Section Header with Signature Pulsing Heart */}
         <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center relative">
-          {/* Subtle floating heart companions beside header */}
           <div className="absolute -left-4 sm:left-4 top-2 pointer-events-none animate-float-bob hidden md:block">
             <Heart className="w-6 h-6 fill-[#F472B6] text-[#F472B6] opacity-85 drop-shadow-xs" />
           </div>
@@ -61,15 +111,14 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
           </div>
 
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
-            How It All Began
+            {t.story.badge}
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
-            Our Love Story
+            {t.story.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
           <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
-            Every love story is beautiful, but ours is our absolute favorite.
-            Here are the unforgettable chapters that brought us to forever.
+            {t.story.subheading}
           </p>
         </div>
 
@@ -80,7 +129,8 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
 
           {/* Timeline Items */}
           <div className="space-y-14 md:space-y-20">
-            {milestones.map((item, index) => {
+            {milestones.map((rawItem, index) => {
+              const item = getMilestoneData(rawItem, index);
               const isEven = index % 2 === 0;
 
               return (
@@ -147,22 +197,19 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
                     </div>
                   </div>
 
-                  {/* Opposite Side: Dedicated Floating Hearts Area (Clearly visible directly beside the card!) */}
+                  {/* Opposite Side: Dedicated Floating Hearts Area */}
                   <div className="hidden md:flex w-1/2 items-center justify-center p-8 pointer-events-none">
                     <div className="relative flex flex-col items-center">
-                      {/* Primary Floating Heart */}
                       <div className="animate-float-bob flex flex-col items-center">
                         <div className="p-3.5 rounded-full bg-white/90 border border-[#FCE7ED] shadow-sm flex items-center justify-center">
                           <Heart className="w-8 h-8 fill-[#D13F72] text-[#D13F72] drop-shadow-md" />
                         </div>
                       </div>
 
-                      {/* Companion Floating Heart */}
                       <div className="animate-float-bob-delayed absolute -top-6 -right-8">
                         <Heart className="w-5 h-5 fill-[#F472B6] text-[#F472B6] drop-shadow-xs opacity-90" />
                       </div>
 
-                      {/* Third delicate floating heart drifting up */}
                       <div className="animate-float-drift-up absolute -bottom-8 -left-6">
                         <Heart className="w-4 h-4 fill-[#FB7185] text-[#FB7185] drop-shadow-xs" />
                       </div>
@@ -174,13 +221,12 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
           </div>
         </div>
 
-        {/* Closing timeline flourish with pulsing heart */}
+        {/* Closing timeline flourish */}
         <div className="text-center mt-20 flex flex-col items-center relative">
           <div className="relative mb-3">
             <div className="w-14 h-14 rounded-full bg-white border border-[#FCE7ED] flex items-center justify-center text-[#D13F72] shadow-sm">
               <Heart className="w-7 h-7 fill-[#D13F72] text-[#D13F72] animate-pulse-gentle drop-shadow-xs" />
             </div>
-            {/* Soft floating hearts around closing flourish */}
             <div className="absolute -left-8 top-1 animate-float-bob">
               <Heart className="w-4 h-4 fill-[#F472B6] text-[#F472B6]" />
             </div>
@@ -191,7 +237,7 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
 
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#9D174D] font-medium">
             <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
-            <span>And our next chapter begins with you</span>
+            <span>{t.story.closingFlourish}</span>
             <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
           </div>
         </div>

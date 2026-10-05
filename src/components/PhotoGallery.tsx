@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { GalleryPhoto } from "../types/wedding";
 import { SafeImage } from "./SafeImage";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface PhotoGalleryProps {
   photos: GalleryPhoto[];
@@ -21,12 +22,13 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
   const [likedPhotoIds, setLikedPhotoIds] = useState<Set<string>>(new Set());
+  const { t, language } = useLanguage();
 
   const categories = [
-    { id: "all", label: "All Moments" },
-    { id: "engagement", label: "The Proposal" },
-    { id: "travels", label: "Adventures" },
-    { id: "moments", label: "Everyday Magic" },
+    { id: "all", label: t.gallery.all },
+    { id: "engagement", label: t.gallery.engagement },
+    { id: "travels", label: t.gallery.travel },
+    { id: "moments", label: t.gallery.portraits },
   ];
 
   const filteredPhotos =
@@ -119,15 +121,14 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
-            Cherished Memories
+            {t.gallery.badge}
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
-            Our Moments
+            {t.gallery.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
           <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
-            Snapshots of laughter, travel, quiet glances, and pure happiness
-            along the path to our wedding day.
+            {t.gallery.subheading}
           </p>
         </div>
 

@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import {
-  Gift,
-  Copy,
-  Check,
-  QrCode,
-  CreditCard,
-  Sparkles,
-  Heart,
-} from "lucide-react";
+import { Gift, Copy, Check, QrCode, CreditCard, Heart } from "lucide-react";
 import { GiftDetails } from "../types/wedding";
+import { useLanguage } from "../i18n/LanguageContext";
 
 interface WeddingGiftSectionProps {
   gift: GiftDetails;
@@ -18,6 +11,7 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
   gift,
 }) => {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const { t, language } = useLanguage();
 
   const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
@@ -34,14 +28,14 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
             <Gift className="w-6 h-6 animate-pulse-gentle" />
           </div>
           <span className="font-script text-3xl text-[#D13F72] block mb-1">
-            With Gratitude
+            {t.gifts.badge}
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl text-[#2D1522] tracking-tight font-normal">
-            Wedding Registry &amp; Gift
+            {t.gifts.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-3 mb-4" />
           <p className="text-sm text-[#713F5B] leading-relaxed max-w-lg mx-auto font-light">
-            {gift.message}
+            {language === "km" ? t.gifts.subheading : gift.message}
           </p>
         </div>
 
@@ -56,10 +50,10 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                 </div>
                 <div>
                   <h4 className="font-serif text-xl font-medium text-[#2D1522]">
-                    Direct Bank Transfer
+                    {t.gifts.bankTransfer}
                   </h4>
                   <span className="text-[11px] text-[#713F5B]">
-                    {gift.bankName}
+                    {language === "km" ? "ABA Bank / Wing Bank" : gift.bankName}
                   </span>
                 </div>
               </div>
@@ -68,7 +62,7 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                 <div className="p-3 bg-white rounded-xl border border-[#FCE7ED] flex items-center justify-between">
                   <div>
                     <span className="text-[10px] uppercase text-[#9D174D] font-medium block">
-                      Account Name
+                      {t.gifts.accountName}
                     </span>
                     <span className="font-medium text-[#2D1522]">
                       {gift.accountHolder}
@@ -79,7 +73,7 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                       copyToClipboard(gift.accountHolder, "holder")
                     }
                     className="p-1.5 hover:bg-[#FFF0F4] rounded-lg text-[#713F5B] hover:text-[#D13F72] transition-colors"
-                    title="Copy Name"
+                    title={t.gifts.copyNumber}
                   >
                     {copiedKey === "holder" ? (
                       <Check className="w-4 h-4 text-emerald-600" />
@@ -92,16 +86,18 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                 <div className="p-3 bg-white rounded-xl border border-[#FCE7ED] flex items-center justify-between">
                   <div>
                     <span className="text-[10px] uppercase text-[#9D174D] font-medium block">
-                      Account Number
+                      {t.gifts.accountNumber}
                     </span>
                     <span className="font-mono text-[#2D1522]">
                       {gift.accountNumber}
                     </span>
                   </div>
                   <button
-                    onClick={() => copyToClipboard("1234567894829", "account")}
+                    onClick={() =>
+                      copyToClipboard(gift.accountNumber, "account")
+                    }
                     className="p-1.5 hover:bg-[#FFF0F4] rounded-lg text-[#713F5B] hover:text-[#D13F72] transition-colors"
-                    title="Copy Account Number"
+                    title={t.gifts.copyNumber}
                   >
                     {copiedKey === "account" ? (
                       <Check className="w-4 h-4 text-emerald-600" />
@@ -114,7 +110,9 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                 <div className="p-3 bg-white rounded-xl border border-[#FCE7ED] flex items-center justify-between">
                   <div>
                     <span className="text-[10px] uppercase text-[#9D174D] font-medium block">
-                      Routing / Sort Code
+                      {language === "km"
+                        ? "លេខកូដធនាគារ (Routing)"
+                        : "Routing / Sort Code"}
                     </span>
                     <span className="font-mono text-[#2D1522]">
                       {gift.routingNumber}
@@ -138,12 +136,13 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
             </div>
 
             <p className="text-[11px] text-[#713F5B] text-center italic">
-              Please include your name in the transfer note so we can properly
-              thank you.
+              {language === "km"
+                ? "សូមបញ្ជាក់ឈ្មោះរបស់អ្នកក្នុងកំណត់ចំណាំ ដើម្បីឱ្យយើងខ្ញុំអាចថ្លែងអំណរគុណ។"
+                : "Please include your name in the transfer note so we can properly thank you."}
             </p>
           </div>
 
-          {/* Card 2: Zelle / Venmo / QR Code */}
+          {/* Card 2: QR Code / Digital Transfer */}
           <div className="bg-gradient-to-br from-[#FFF9FA] to-[#FFF0F4] rounded-3xl p-7 border border-[#FCE7ED] shadow-xs flex flex-col justify-between items-center text-center">
             <div className="w-full">
               <div className="flex items-center justify-center gap-3 mb-5">
@@ -152,10 +151,14 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                 </div>
                 <div className="text-left">
                   <h4 className="font-serif text-xl font-medium text-[#2D1522]">
-                    Zelle &amp; Digital Transfer
+                    {language === "km"
+                      ? "ស្កេន QR Code ជូនពរ"
+                      : "Zelle & Digital Transfer"}
                   </h4>
                   <span className="text-[11px] text-[#713F5B]">
-                    Instant Honeymoon Contribution
+                    {language === "km"
+                      ? "KHQR / ABA / Wing"
+                      : "Instant Honeymoon Contribution"}
                   </span>
                 </div>
               </div>
@@ -167,7 +170,6 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
                   viewBox="0 0 100 100"
                   fill="currentColor"
                 >
-                  {/* Stylized QR Matrix Pattern */}
                   <rect
                     x="10"
                     y="10"
@@ -322,7 +324,10 @@ export const WeddingGiftSection: React.FC<WeddingGiftSectionProps> = ({
             </div>
 
             <p className="text-[11px] text-[#713F5B] mt-2">
-              Honeymoon Destination: {gift.honeymoonGoal}
+              {language === "km"
+                ? "គោលដៅក្រេបទឹកឃ្មុំ៖"
+                : "Honeymoon Destination:"}{" "}
+              {gift.honeymoonGoal}
             </p>
           </div>
         </div>

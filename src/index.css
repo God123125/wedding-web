@@ -5,6 +5,7 @@
     --font-display: "Cormorant Garamond", Georgia, serif;
     --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
     --font-script: "Alex Brush", cursive;
+    --font-khmer: "Kantumruy Pro", "Plus Jakarta Sans", system-ui, sans-serif;
   }
 
   body {
@@ -12,6 +13,24 @@
     color: #381e2b;
     background-color: #fff9fa;
     overflow-x: hidden;
+  }
+
+  body.font-khmer {
+    font-family: var(--font-khmer);
+    line-height: 1.7;
+  }
+
+  body.font-khmer h1,
+  body.font-khmer h2,
+  body.font-khmer h3,
+  body.font-khmer .font-serif {
+    font-family: "Kantumruy Pro", var(--font-display);
+    font-weight: 600;
+  }
+
+  body.font-khmer .font-script {
+    font-family: "Kantumruy Pro", cursive;
+    font-style: italic;
   }
 
   h1,
