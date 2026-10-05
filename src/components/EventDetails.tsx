@@ -70,10 +70,10 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ events }) => {
     >
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="font-script text-3xl text-[#D13F72] block mb-1">
+          <span className="font-script text-3xl text-[#D13F72] block mb-4">
             {t.schedule.badge}
           </span>
-          <h3 className="font-serif text-3xl sm:text-4xl text-[#2D1522] tracking-tight font-normal">
+          <h3 className="font-khmer text-3xl sm:text-4xl text-[#2D1522] tracking-tight font-normal">
             {t.schedule.heading}
           </h3>
           <p className="text-xs sm:text-sm text-[#713F5B] mt-2">
@@ -95,30 +95,30 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ events }) => {
                     {getIcon(event.icon)}
                   </div>
 
-                  <h4 className="font-serif text-2xl text-[#2D1522] font-medium mb-3">
+                  <h4 className="font-khmer text-2xl text-[#2D1522] font-medium mb-3">
                     {event.title}
                   </h4>
 
-                  <div className="space-y-1.5 mb-4 text-xs text-[#713F5B]">
+                  <div className="space-y-1.5 mb-4 text-2xs text-[#713F5B]">
                     <div className="flex items-center gap-2 text-[#9D174D] font-medium">
                       <Clock className="w-3.5 h-3.5" />
                       <span>{event.time}</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                       <MapPin className="w-3.5 h-3.5 text-[#D13F72]" />
                       <span>{event.location}</span>
-                    </div>
+                    </div> */}
                   </div>
 
-                  <p className="text-xs text-[#5F354A] leading-relaxed font-light">
+                  <p className="text-2xs text-[#5F354A] leading-relaxed font-light">
                     {event.description}
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#FCE7ED]/50 flex items-center justify-between text-[11px] text-[#9D174D]/70">
+                {/* <div className="pt-6 mt-6 border-t border-[#FCE7ED]/50 flex items-center justify-between text-[11px] text-[#9D174D]/70">
                   <span>Savannah Estate</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E8B4C4]" />
-                </div>
+                </div> */}
               </div>
             );
           })}

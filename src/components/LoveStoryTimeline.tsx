@@ -113,13 +113,13 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
             {t.story.badge}
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+          {/* <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
             {t.story.heading}
-          </h2>
+          </h2> */}
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
-          <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
+          {/* <p className="text-2xl sm:text-2xl text-[#713F5B] leading-relaxed">
             {t.story.subheading}
-          </p>
+          </p> */}
         </div>
 
         {/* Timeline Container */}
@@ -235,11 +235,11 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#9D174D] font-medium">
+          {/* <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#9D174D] font-medium">
             <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
             <span>{t.story.closingFlourish}</span>
             <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

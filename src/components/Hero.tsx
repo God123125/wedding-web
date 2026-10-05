@@ -130,21 +130,21 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         {/* Romantic tagline */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/70 border border-[#FCE7ED] shadow-2xs mb-6 text-xs font-medium tracking-widest uppercase text-[#9D174D]">
-          <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
+          {/* <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" /> */}
           <span>{t.hero.tagline}</span>
-          <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
+          {/* <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" /> */}
         </div>
 
         {/* Groom & Bride Names with elegant ampersand */}
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#2D1522] leading-none mb-4 font-normal">
+        <h1 className="free-hand text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#2D1522] leading-none mb-4">
           <span className="inline-block hover:scale-[1.01] transition-transform duration-300">
-            {couple.groomName}
+            {t.nav.groom_name}
           </span>
           <span className="font-script text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#D13F72] mx-3 sm:mx-5 inline-block align-middle font-normal">
             &amp;
           </span>
           <span className="inline-block hover:scale-[1.01] transition-transform duration-300">
-            {couple.brideName}
+            {t.nav.bride_name}
           </span>
         </h1>
 
@@ -154,15 +154,15 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
           <span aria-hidden="true" className="text-[#D13F72]">
             ·
           </span>
-          <span>{couple.venueName}</span>
+          <span>{t.hero.venue}</span>
           <span aria-hidden="true" className="text-[#D13F72]">
             ·
           </span>
-          <span>Savannah, Georgia</span>
+          <span>{t.hero.address}</span>
         </div>
 
         {/* Romantic quote */}
-        <p className="max-w-xl text-base sm:text-lg text-[#5F354A] font-khmer font-script italic mb-10 leading-relaxed text-balance">
+        <p className="max-w-xl text-base sm:text-lg text-[#5F354A] free-hand mb-10 leading-relaxed text-balance">
           {t.hero.quote}
         </p>
 
@@ -176,14 +176,14 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
             <span>{t.hero.loveStoryBtn}</span>
           </button>
 
-          <button
+          {/* <button
             onClick={handleAddToCalendar}
             className="px-6 py-3.5 rounded-full text-sm font-medium tracking-wide text-[#713F5B] bg-white/80 hover:bg-white border border-[#FCE7ED] shadow-xs hover:shadow-md transition-all duration-300 flex items-center gap-2 active:scale-98"
             title="Add wedding to Google Calendar"
           >
             <Calendar className="w-4 h-4 text-[#D13F72]" />
             <span>{t.hero.saveTheDateBtn}</span>
-          </button>
+          </button> */}
         </div>
 
         {/* Countdown Timer with smooth cards */}

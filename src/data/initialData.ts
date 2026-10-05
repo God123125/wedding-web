@@ -19,7 +19,7 @@ export const initialCoupleInfo: CoupleInfo = {
     "A landscape botanical artist who finds poetry in wildflower fields, acoustic vinyl records, and sunsets by the sea. Julian is my favorite sanctuary, my warmest home, and my greatest adventure.",
   brideImage:
     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
-  weddingDate: "2026-06-20T15:30:00",
+  weddingDate: "2026-12-04T15:30:00",
   weddingTime: "Saturday, June 20, 2026 at 3:30 PM",
   venueName: "The Rosewood Glasshouse & Botanical Gardens",
   venueAddress: "450 Magnolia Blossom Way, Savannah, GA 31401",

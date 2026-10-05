@@ -33,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: t.nav.ceremony, href: "#ceremony" },
     { label: t.nav.schedule, href: "#events" },
     { label: t.nav.moments, href: "#gallery" },
-    { label: t.nav.gifts, href: "#gift" },
+    // { label: t.nav.gifts, href: "#gift" },
   ];
 
   const handleNavClick = (
@@ -61,13 +61,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="font-serif text-2xl tracking-wide text-[#381E2B] hover:text-[#9D174D] transition-colors flex items-center gap-1.5 shrink-0"
+          className="free-hand text-2xl tracking-wide text-[#381E2B] hover:text-[#9D174D] transition-colors flex items-center gap-1.5 shrink-0"
         >
-          <span>{groomName.split(" ")[0]}</span>
+          <span>{t.nav.groom_name}</span>
           <span className="font-script text-2xl text-[#D13F72] px-0.5">
             &amp;
           </span>
-          <span>{brideName.split(" ")[0]}</span>
+          <span>{t.nav.bride_name}</span>
         </a>
 
         {/* Zone 2: Clean text navigation links */}
@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <AudioPlayer />
 
-          {onOpenCustomizer && (
+          {/* {onOpenCustomizer && (
             <button
               onClick={onOpenCustomizer}
               className="p-2 text-[#713F5B] hover:text-[#9D174D] hover:bg-[#FCE7ED]/50 rounded-full transition-colors hidden sm:flex items-center justify-center"
@@ -100,15 +100,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Settings2 className="w-4 h-4" />
             </button>
-          )}
+          )} */}
 
-          <a
+          {/* <a
             href="#rsvp"
             onClick={(e) => handleNavClick(e, "#rsvp")}
             className="px-4 py-2 text-xs font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] rounded-full shadow-xs hover:shadow-md transition-all duration-300 whitespace-nowrap active:scale-95"
           >
             {t.nav.rsvp}
-          </a>
+          </a> */}
 
           {/* Mobile hamburger button */}
           <button

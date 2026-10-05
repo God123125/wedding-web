@@ -122,8 +122,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
             {t.gallery.badge}
-          </span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+          </span>{" "}
+          <br />
+          <h2 className="font-khmer text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
             {t.gallery.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />

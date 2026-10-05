@@ -41,9 +41,7 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
   );
 
   const handleCopyAddress = () => {
-    navigator.clipboard.writeText(
-      `${couple.venueName}, ${couple.venueAddress}`,
-    );
+    navigator.clipboard.writeText(`${t.hero.venue} ${t.hero.address}`);
     setCopiedAddress(true);
     setTimeout(() => setCopiedAddress(false), 2500);
   };
@@ -53,7 +51,7 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
       `${couple.venueName} ${couple.venueAddress}`,
     );
     window.open(
-      `https://www.google.com/maps/search/?api=1&query=${query}`,
+      `https://maps.app.goo.gl/t6v6EVsAWXXYGSQ99`,
       "_blank",
       "noopener,noreferrer",
     );
@@ -67,14 +65,15 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
+          <span className="font-script mb-2 text-3xl sm:text-4xl text-[#D13F72] block">
             {t.ceremony.badge}
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+          <br />
+          <h2 className="free-hand text-3xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
             {t.ceremony.heading}
           </h2>
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
-          <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
+          <p className="text-2xl sm:text-base text-[#713F5B] leading-relaxed">
             {t.ceremony.subheading}
           </p>
         </div>
@@ -84,13 +83,13 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Details */}
             <div className="lg:col-span-7 flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#9D174D] mb-4">
+              <div className="inline-flex items-center gap-2 text-2xl font-semibold tracking-widest uppercase text-[#9D174D] mb-4">
                 <Sparkles className="w-3.5 h-3.5 text-[#D13F72]" />
                 <span>{t.ceremony.heading}</span>
               </div>
 
-              <h3 className="font-serif text-3xl sm:text-4xl text-[#2D1522] font-medium mb-4">
-                {couple.venueName}
+              <h3 className="free-hand text-3xl sm:text-4xl text-[#2D1522] font-medium mb-4">
+                {t.hero.our_wedding_venue}
               </h3>
 
               <div className="space-y-3 mb-6 text-[#5F354A]">
@@ -108,59 +107,29 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                     <Clock className="w-4 h-4" />
                   </div>
                   <span className="text-sm sm:text-base font-medium text-[#2D1522]">
-                    {formattedTime}
+                    7:00 AM - 8:00 PM
                   </span>
                 </div>
 
-                <div className="flex items-start gap-3">
+                <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#D13F72] shrink-0 border border-[#FCE7ED] mt-0.5">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <span className="text-sm sm:text-base text-[#5F354A]">
-                    {couple.venueAddress}
+                    {t.hero.venue}
                   </span>
                 </div>
               </div>
 
               <p className="text-sm text-[#713F5B] leading-relaxed italic mb-8 border-l-2 border-[#D13F72]/50 pl-4 py-1">
-                {couple.venueNote}
+                {t.hero.address}
               </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  onClick={handleOpenMap}
-                  className="px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] shadow-xs hover:shadow-md transition-all flex items-center gap-2"
-                >
-                  <Navigation className="w-3.5 h-3.5" />
-                  <span>{t.ceremony.getDirections}</span>
-                  <ExternalLink className="w-3 h-3 opacity-80" />
-                </button>
-
-                <button
-                  onClick={handleCopyAddress}
-                  className="px-5 py-3 rounded-full text-xs font-medium tracking-wide text-[#713F5B] bg-white hover:bg-[#FFF9FA] border border-[#FCE7ED] transition-colors flex items-center gap-2"
-                >
-                  {copiedAddress ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700">
-                        {t.ceremony.addressCopied}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-[#D13F72]" />
-                      <span>{t.ceremony.copyAddress}</span>
-                    </>
-                  )}
-                </button>
-              </div>
             </div>
 
             {/* Right: Stylized Venue / Map Representation */}
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-[#FCE7ED] shadow-sm bg-white aspect-4/3 flex flex-col items-center justify-center p-6 text-center group">
+              <div className="relative rounded-2xl overflow-hidden border border-[#FCE7ED] shadow-sm bg-white aspect-[4/3] flex flex-col items-center justify-center p-6 text-center group">
+                {/* Dotted background */}
                 <div
                   className="absolute inset-0 opacity-20 pointer-events-none"
                   style={{
@@ -170,34 +139,51 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                   }}
                 />
 
+                {/* Content */}
                 <div className="relative z-10 flex flex-col items-center">
                   <div className="w-14 h-14 rounded-full bg-[#FFF0F4] border border-[#F9CAD8] shadow-xs flex items-center justify-center text-[#D13F72] mb-3 group-hover:scale-110 transition-transform">
                     <MapPin className="w-6 h-6 fill-current animate-bounce" />
                   </div>
-                  <h4 className="font-serif text-xl text-[#2D1522] font-medium mb-1">
-                    {couple.venueName}
+
+                  <h4 className="free-hand text-xl text-[#2D1522] font-medium mb-1">
+                    {t.hero.venue}
                   </h4>
-                  <p className="text-xs text-[#713F5B] max-w-xs mb-4">
-                    {couple.venueAddress}
+                  <p className="text-xl text-[#713F5B] max-w-xs mb-4">
+                    {t.hero.address}
                   </p>
 
-                  <button
-                    onClick={handleOpenMap}
-                    className="text-xs text-[#D13F72] font-semibold hover:underline inline-flex items-center gap-1.5"
-                  >
-                    <span>{t.ceremony.getDirections}</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </button>
-                </div>
+                  {/* Action Buttons */}
+                  <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+                    <button
+                      onClick={handleOpenMap}
+                      className="px-6 py-3 rounded-full cursor-pointer text-2xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] shadow-xs hover:shadow-md transition-all flex items-center gap-2"
+                    >
+                      <Navigation className="w-3.5 h-3.5" />
+                      <span>{t.ceremony.getDirections}</span>
+                      <ExternalLink className="w-3 h-3 opacity-80" />
+                    </button>
 
-                {/* Subtitle tag for dress code */}
-                <div className="absolute bottom-3 left-3 right-3 text-center py-2 px-3 bg-white/90 backdrop-blur-xs rounded-xl border border-[#FCE7ED] text-[11px] text-[#713F5B]">
-                  <span className="font-medium text-[#9D174D]">
-                    {t.ceremony.dressCodeTitle}:{" "}
-                  </span>
-                  {language === "km"
-                    ? t.ceremony.dressCodeValue
-                    : couple.dressCode}
+                    <button
+                      onClick={handleCopyAddress}
+                      className="px-5 py-3 rounded-full text-2xs font-medium tracking-wide text-[#713F5B] bg-white hover:bg-[#FFF9FA] border border-[#FCE7ED] transition-colors flex items-center gap-2"
+                    >
+                      {copiedAddress ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span className="text-emerald-700">
+                            {t.ceremony.addressCopied}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-[#D13F72]" />
+                          <span className="cursor-pointer">
+                            {t.ceremony.copyAddress}
+                          </span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

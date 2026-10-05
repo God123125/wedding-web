@@ -2,6 +2,10 @@ export type Language = "en" | "km";
 
 export interface Translations {
   nav: {
+    groom_name: string;
+    bride_name: string;
+    groom_fullName: string;
+    bride_fullName: string;
     home: string;
     couple: string;
     story: string;
@@ -23,6 +27,9 @@ export interface Translations {
     minutes: string;
     seconds: string;
     meetCouple: string;
+    venue: string;
+    address: string;
+    our_wedding_venue: string;
   };
   couple: {
     badge: string;
@@ -151,11 +158,38 @@ export interface Translations {
     save: string;
     reset: string;
   };
+  audio: {
+    play: string;
+    pause: string;
+    playing: string;
+    paused: string;
+    title: string;
+    subtitle: string;
+    nowPlaying: string;
+    uploadMp3: string;
+    uploadDesc: string;
+    orPasteUrl: string;
+    urlPlaceholder: string;
+    applyUrl: string;
+    presets: string;
+    presetCanon: string;
+    presetAcoustic: string;
+    presetClairDeLune: string;
+    presetChime: string;
+    customTrack: string;
+    volume: string;
+    loop: string;
+    removeCustom: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
   en: {
     nav: {
+      groom_name: "Marady",
+      bride_name: "Socheata",
+      groom_fullName: "Eng Marady",
+      bride_fullName: "Kao Hemsocheata",
       home: "Home",
       couple: "Couple",
       story: "Story",
@@ -168,30 +202,32 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       tagline: "We're Getting Married!",
-      quote:
-        '"When you realize you want to spend the rest of your life with somebody, you want the rest of your life to start as soon as possible."',
+      quote: '"A 100 years old friendship"',
       loveStoryBtn: "Our Love Story",
       saveTheDateBtn: "Save The Date",
-      countdownTitle: "Counting Down to Forever",
+      countdownTitle: "Counting down to our special day",
       days: "Days",
       hours: "Hours",
       minutes: "Minutes",
       seconds: "Seconds",
       meetCouple: "Meet The Couple",
+      venue: "Borey New World Kambol 6",
+      address: "No. 14 St.27c",
+      our_wedding_venue: "Our Wedding Venue",
     },
     couple: {
-      badge: "The Happy Couple",
-      heading: "Two Hearts, One Journey",
+      badge: "Happy Wedding Day",
+      heading: "With the new couple",
       subheading:
-        "Together with their loving families, invite you to celebrate the bond of love, commitment, and eternal friendship.",
+        "We would like to invite all beloved people to join our wedding that will happen soon.",
       groomBadge: "The Groom",
       brideBadge: "The Bride",
       sonOf: "Son of",
       daughterOf: "Daughter of",
     },
     story: {
-      badge: "How It All Began",
-      heading: "Our Love Story",
+      badge: "Our love album",
+      heading: "Our Love Journey",
       subheading:
         "Every love story is beautiful, but ours is our absolute favorite. Here are the unforgettable chapters that brought us to forever.",
       milestone1Title: "The First Meeting",
@@ -330,9 +366,38 @@ export const translations: Record<Language, Translations> = {
       save: "Save Changes",
       reset: "Reset to Defaults",
     },
+    audio: {
+      play: "Play Melody",
+      pause: "Pause Melody",
+      playing: "Melody Playing",
+      paused: "Melody Paused",
+      title: "Wedding Melody & MP3 Player",
+      subtitle:
+        "Customize or upload your favorite romantic song for this celebration.",
+      nowPlaying: "Now Playing",
+      uploadMp3: "Upload Your MP3 File",
+      uploadDesc:
+        "Select an MP3 file from your device (saved locally on your browser).",
+      orPasteUrl: "Or Paste MP3 Audio Link",
+      urlPlaceholder: "https://example.com/our-wedding-song.mp3",
+      applyUrl: "Set Song URL",
+      presets: "Featured Wedding Songs",
+      presetCanon: "Canon in D (Pachelbel) - Strings & Piano",
+      presetAcoustic: "Acoustic Wedding Romance - Guitar & Harp",
+      presetClairDeLune: "Clair de Lune (Debussy) - Romantic Piano",
+      presetChime: "Crystal Music Box (Chimes)",
+      customTrack: "Custom Song",
+      volume: "Volume",
+      loop: "Loop Music",
+      removeCustom: "Remove Custom Track",
+    },
   },
   km: {
     nav: {
+      groom_name: "ម៉ារ៉ាឌី",
+      bride_name: "សុជាតា",
+      groom_fullName: "អេង ម៉ារ៉ាឌី",
+      bride_fullName: "កៅ ហែមសុជាតា",
       home: "ទំព័រដើម",
       couple: "គូស្នេហ៍",
       story: "រឿងរ៉ាវស្នេហ៍",
@@ -345,29 +410,31 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       tagline: "យើងរៀបអាពាហ៍ពិពាហ៍ហើយ!",
-      quote:
-        "«នៅពេលអ្នកដឹងថាអ្នកចង់រស់នៅជាមួយមនុស្សម្នាក់អស់មួយជីវិត អ្នកចង់ឱ្យជីវិតនោះចាប់ផ្តើមឱ្យបានលឿនបំផុតតាមដែលអាចធ្វើទៅបាន។»",
+      quote: "«មិត្ត ១០០ ឆ្នាំ»",
       loveStoryBtn: "រឿងរ៉ាវស្នេហារបស់យើង",
       saveTheDateBtn: "កត់ត្រាកាលបរិច្ឆេទ",
-      countdownTitle: "រាប់ថយក្រោយឆ្ពោះទៅកាន់ថ្ងៃពិសេស",
+      countdownTitle: "រាប់ថយក្រោយឆ្ពោះទៅកាន់ថ្ងៃពិសេសរបស់ពួកយើង",
       days: "ថ្ងៃ",
       hours: "ម៉ោង",
       minutes: "នាទី",
       seconds: "វិនាទី",
       meetCouple: "ស្គាល់កូនកំលោះ និងកូនក្រមុំ",
+      venue: "បុរីពិភពថ្មីកំបូលគម្រោងទី 6",
+      address: "ផ្ទះលេខ 14 ផ្លូវលេខ 27c",
+      our_wedding_venue: "ទីតាំងពិធីមង្គលការរបស់ពួកយើង",
     },
     couple: {
-      badge: "គូស្នេហ៍ដ៏មានសុភមង្គល",
-      heading: "ចិត្តពីរ រួមជាជីវិតតែមួយ",
+      badge: "រីករាយជាមួយអាពាហ៍ពិពាហ៍របស់ពួកយើង",
+      heading: "With the new couple",
       subheading:
-        "រួមជាមួយមាតាបិតាទាំងសងខាង សូមគោរពអញ្ជើញលោកអ្នកចូលរួមអបអរសាទរចំណងអាពាហ៍ពិពាហ៍ប្រកបដោយក្តីស្រឡាញ់ និងសុភមង្គល។",
+        "សូមគោរពអញ្ជើញភ្ញៀវកត្តិយសទាំងអស់ចូលរួមអាពាហ៍ពិពាហ៍របស់ពួកយើងនាពេលខាងមុខនេះ។",
       groomBadge: "កូនកំលោះ",
       brideBadge: "កូនក្រមុំ",
       sonOf: "កូនប្រុសរបស់",
       daughterOf: "កូនស្រីរបស់",
     },
     story: {
-      badge: "ដំណើរដើមទងនៃក្តីស្នេហ៍",
+      badge: "គម្រងរូបភាពរបស់ពួកយើង",
       heading: "រឿងរ៉ាវស្នេហារបស់យើង",
       subheading:
         "រឿងរ៉ាវស្នេហាទាំងអស់សុទ្ធតែស្រស់ស្អាត ប៉ុន្តែរឿងរ៉ាវរបស់យើងគឺជាអ្វីដែលយើងស្រឡាញ់បំផុត។ នេះជាអនុស្សាវរីយ៍ដែលនាំយើងមករកថ្ងៃនេះ។",
@@ -410,7 +477,7 @@ export const translations: Record<Language, Translations> = {
       dressCodeValue: "សម្លៀកបំពាក់សមរម្យ និងថ្លៃថ្នូរ",
       dressCodeDesc:
         "ពណ៌ផ្កាឈូកស្រាល ពណ៌ស្រាសំប៉ាញ និងពណ៌បែបធម្មជាតិស្រទន់ ត្រូវបានលើកទឹកចិត្តដោយក្តីស្រឡាញ់។",
-      getDirections: "បង្ហាញផ្លូវលើផែនទី Google",
+      getDirections: "ចុចដើម្បីមើលផែនទី Google",
       copyAddress: "ចម្លងអាសយដ្ឋាន",
       addressCopied: "បានចម្លងអាសយដ្ឋាន!",
     },
@@ -507,6 +574,31 @@ export const translations: Record<Language, Translations> = {
       venueAddress: "អាសយដ្ឋាន",
       save: "រក្សាទុកការផ្លាស់ប្តូរ",
       reset: "កំណត់ឡើងវិញ",
+    },
+    audio: {
+      play: "Play Melody",
+      pause: "Pause Melody",
+      playing: "Melody Playing",
+      paused: "Melody Paused",
+      title: "Wedding Melody & MP3 Player",
+      subtitle:
+        "Customize or upload your favorite romantic song for this celebration.",
+      nowPlaying: "Now Playing",
+      uploadMp3: "Upload Your MP3 File",
+      uploadDesc:
+        "Select an MP3 file from your device (saved locally on your browser).",
+      orPasteUrl: "Or Paste MP3 Audio Link",
+      urlPlaceholder: "https://example.com/our-wedding-song.mp3",
+      applyUrl: "Set Song URL",
+      presets: "Featured Wedding Songs",
+      presetCanon: "Canon in D (Pachelbel) - Strings & Piano",
+      presetAcoustic: "Acoustic Wedding Romance - Guitar & Harp",
+      presetClairDeLune: "Clair de Lune (Debussy) - Romantic Piano",
+      presetChime: "Crystal Music Box (Chimes)",
+      customTrack: "Custom Song",
+      volume: "Volume",
+      loop: "Loop Music",
+      removeCustom: "Remove Custom Track",
     },
   },
 };

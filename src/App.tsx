@@ -77,10 +77,10 @@ function WeddingAppContent() {
       <PhotoGallery photos={gallery} />
 
       {/* RSVP Section */}
-      <RsvpSection weddingDate={couple.weddingDate} />
+      {/* <RsvpSection weddingDate={couple.weddingDate} /> */}
 
       {/* Wedding Gift & Registry */}
-      <WeddingGiftSection gift={gift} />
+      {/* <WeddingGiftSection gift={gift} /> */}
 
       {/* Closing Section */}
       <ClosingSection couple={couple} />

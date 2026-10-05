@@ -26,9 +26,9 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
             {t.couple.badge}
           </span>
-          <h2 className="font-script text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+          {/* <h2 className="font-script text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
             {t.couple.heading}
-          </h2>
+          </h2> */}
           <div className="w-16 h-[1.5px] bg-[#E8B4C4] mx-auto mt-4 mb-4" />
           <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
             {t.couple.subheading}
@@ -56,16 +56,16 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
             <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
               {language === "km" ? t.couple.groomBadge : couple.groomTitle}
             </span>
-            <h3 className="font-serif text-3xl text-[#2D1522] mb-3 font-medium">
-              {couple.groomName}
+            <h3 className="free-hand text-3xl text-[#2D1522] mb-3 font-medium">
+              {t.nav.groom_fullName}
             </h3>
 
-            <div className="relative px-4 mt-2">
+            {/* <div className="relative px-4 mt-2">
               <Quote className="w-5 h-5 text-[#E8B4C4] mx-auto mb-2 opacity-60" />
               <p className="text-sm text-[#5F354A] leading-relaxed font-light italic">
                 &ldquo;{couple.groomBio}&rdquo;
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Central Romantic Connector (Col 6) */}
@@ -102,16 +102,16 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
             <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
               {language === "km" ? t.couple.brideBadge : couple.brideTitle}
             </span>
-            <h3 className="font-serif text-3xl text-[#2D1522] mb-3 font-medium">
-              {couple.brideName}
+            <h3 className="free-hand text-3xl text-[#2D1522] mb-3 font-medium">
+              {t.nav.bride_fullName}
             </h3>
 
-            <div className="relative px-4 mt-2">
+            {/* <div className="relative px-4 mt-2">
               <Quote className="w-5 h-5 text-[#E8B4C4] mx-auto mb-2 opacity-60" />
               <p className="text-sm text-[#5F354A] leading-relaxed font-light italic">
                 &ldquo;{couple.brideBio}&rdquo;
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 

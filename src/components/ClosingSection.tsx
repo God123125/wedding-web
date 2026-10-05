@@ -43,16 +43,16 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
         </div>
 
         {/* Groom & Bride Names */}
-        <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl text-[#2D1522] tracking-tight font-normal mb-3">
-          <span>{couple.groomName}</span>
+        <h2 className="font-khmer font-bold text-4xl sm:text-5xl md:text-6xl text-[#2D1522] tracking-tight font-normal mb-3">
+          <span>{t.nav.groom_name}</span>
           <span className="font-script text-4xl sm:text-5xl text-[#D13F72] mx-3">
             &amp;
           </span>
-          <span>{couple.brideName}</span>
+          <span>{t.nav.bride_name}</span>
         </h2>
 
         {/* Romantic Anchor Statement */}
-        <p className="font-serif text-xl sm:text-2xl text-[#831843] italic mb-6">
+        <p className="font-khmer text-xl sm:text-2xl text-[#831843] italic mb-6">
           {language === "km"
             ? "«នៅជាមួយគ្នា គឺជាកន្លែងដែលយើងស្រឡាញ់បំផុត»"
             : "“Together is our favorite place to be.”"}
@@ -62,7 +62,9 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
         <div className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-8">
           <span>{formattedDate}</span>
           <span className="mx-2">·</span>
-          <span>Savannah, Georgia</span>
+          <span>
+            {t.hero.venue} {t.hero.address}
+          </span>
         </div>
 
         {/* Final Thank You Note */}
@@ -73,21 +75,20 @@ export const ClosingSection: React.FC<ClosingSectionProps> = ({ couple }) => {
         {/* Scroll back to top link */}
         <button
           onClick={scrollToTop}
-          className="text-xs tracking-wider uppercase font-semibold text-[#9D174D] hover:text-[#D13F72] hover:underline transition-colors pb-8"
+          className="cursor-pointer text-2xs tracking-wider uppercase font-semibold text-[#9D174D] hover:text-[#D13F72] hover:underline transition-colors pb-8"
         >
           {t.closing.backToTop} ↑
         </button>
 
         {/* Clean copyright footer */}
-        <div className="w-full pt-8 border-t border-[#FCE7ED]/70 text-[11px] text-[#A07086] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="w-full pt-8 border-t border-[#FCE7ED]/70  text-[18px] text-[#A07086] flex flex-col sm:flex-row items-center justify-between gap-3">
           <span>
-            {couple.groomName.split(" ")[0]} &amp;{" "}
-            {couple.brideName.split(" ")[0]}&apos;s Wedding Celebration
+            {t.nav.groom_name} &amp; {t.nav.bride_name}&apos;s Wedding
+            Celebration
           </span>
           <span className="flex items-center gap-1">
-            Made with{" "}
-            <Heart className="w-3 h-3 fill-rose-500 text-rose-500 inline" /> for
-            our forever
+            Developed By Kerry Kerb
+            <Heart className="w-3 h-3 fill-rose-500 text-rose-500 inline" />
           </span>
         </div>
       </div>
