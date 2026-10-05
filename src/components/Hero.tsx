@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Heart, Calendar, ChevronDown, Sparkles } from "lucide-react";
 import { CoupleInfo } from "../types/wedding";
+import { HeroHearts } from "./HeroHearts";
 
 interface HeroProps {
   couple: CoupleInfo;
@@ -91,8 +92,8 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
       id="home"
       className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-6 overflow-hidden bg-gradient-to-b from-[#FFF0F4] via-[#FFF8F9] to-[#FFF0F4]"
     >
-      {/* Delicate romantic radial glow in the background */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-[#F9CAD8]/35 to-[#FFF0F4]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Lively Floating Crystal-Clear Pastel Hearts Layer (No deep color) */}
+      <HeroHearts />
 
       {/* Decorative floral lace SVG flourishes at corners */}
       <div className="absolute top-8 left-8 text-[#F9CAD8]/40 pointer-events-none hidden md:block">
