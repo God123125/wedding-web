@@ -29,7 +29,6 @@ interface AudioTrack {
   title: string;
   subtitle: string;
   src?: string; // MP3 URL or blob URL
-  isSynth?: boolean;
   isFixed?: boolean;
 }
 
@@ -41,23 +40,11 @@ const PRESET_TRACKS: AudioTrack[] = [
     src: FIXED_WEDDING_SONG.src,
     isFixed: true,
   },
-  {
-    id: "clair-de-lune",
-    title: "Clair de Lune",
-    subtitle: "Claude Debussy · Romantic Piano",
-    src: "https://upload.wikimedia.org/wikipedia/commons/2/21/Debussy_-_Clair_de_Lune_%28Suite_Bergamasque%29.ogg",
-  },
-  {
-    id: "crystal-box",
-    title: "Crystal Music Box",
-    subtitle: "Soft Synthesized Harp & Chimes",
-    isSynth: true,
-  },
 ];
 
 export const AudioPlayer: React.FC = () => {
   const { t, language } = useLanguage();
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTrackId, setSelectedTrackId] =
     useState<string>("fixed-default-song");
@@ -74,10 +61,8 @@ export const AudioPlayer: React.FC = () => {
   const [duration, setDuration] = useState(0);
   const [uploadMessage, setUploadMessage] = useState<string | null>(null);
 
-  // Audio elements & Web Audio Synth refs
+  // Audio elements & file picker refs
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const timerRef = useRef<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Restore saved audio settings & uploaded MP3 from IndexedDB & localStorage on mount
@@ -117,73 +102,12 @@ export const AudioPlayer: React.FC = () => {
 
     // Clean up audio element on unmount
     return () => {
-      stopSynthLoop();
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.src = "";
       }
     };
   }, []);
-
-  // Web Audio Chimes Synth Fallback Logic
-  const notes = [174.61, 220.0, 261.63, 329.63, 349.23, 440.0, 523.25, 659.25];
-  const playChime = (frequency: number) => {
-    if (!audioCtxRef.current) return;
-    const ctx = audioCtxRef.current;
-    if (ctx.state === "suspended") {
-      ctx.resume();
-    }
-    const osc = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(frequency, ctx.currentTime);
-
-    gainNode.gain.setValueAtTime(0.0001, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(
-      0.06 * (isMuted ? 0 : volume),
-      ctx.currentTime + 0.15,
-    );
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.8);
-
-    osc.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    osc.start();
-    osc.stop(ctx.currentTime + 2.9);
-  };
-
-  const startSynthLoop = () => {
-    if (!audioCtxRef.current) {
-      const AudioCtx =
-        window.AudioContext ||
-        (window as unknown as { webkitAudioContext: typeof AudioContext })
-          .webkitAudioContext;
-      audioCtxRef.current = new AudioCtx();
-    }
-    let step = 0;
-    const progression = [0, 2, 4, 6, 3, 5, 2, 4, 1, 3, 5, 7, 4, 2, 0, 3];
-
-    const tick = () => {
-      const noteIndex = progression[step % progression.length];
-      playChime(notes[noteIndex]);
-      step++;
-      if (step % 4 === 0) {
-        setTimeout(() => {
-          playChime(notes[0] * 0.5);
-        }, 120);
-      }
-      timerRef.current = window.setTimeout(tick, 900);
-    };
-    tick();
-  };
-
-  const stopSynthLoop = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  };
 
   // Resolve current active audio track
   const activeTrack: AudioTrack = (() => {
@@ -205,6 +129,39 @@ export const AudioPlayer: React.FC = () => {
     return preset || PRESET_TRACKS[0];
   })();
 
+  // Synchronize playing state with the actual audio element
+  const playAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (activeTrack.src && (!audio.src || !audio.src.endsWith(activeTrack.src))) {
+      audio.src = activeTrack.src;
+    }
+
+    audio.volume = isMuted ? 0 : volume;
+    audio.loop = isLooping;
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Autoplay blocked by browser policy until interaction
+          setIsPlaying(false);
+        });
+    }
+  };
+
+  const pauseAudio = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.pause();
+    }
+    setIsPlaying(false);
+  };
+
   // Keep volume & muted state in sync with audio element
   useEffect(() => {
     if (audioRef.current) {
@@ -213,52 +170,58 @@ export const AudioPlayer: React.FC = () => {
     }
   }, [volume, isMuted, isLooping]);
 
+  // Attempt autoplay on mount and retry on any first user interaction (click/touch/scroll/keypress)
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && activeTrack.src) {
+      if (!audio.src || !audio.src.endsWith(activeTrack.src)) {
+        audio.src = activeTrack.src;
+      }
+      audio.volume = isMuted ? 0 : volume;
+      audio.loop = isLooping;
+      audio.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        setIsPlaying(false);
+      });
+    }
+
+    const handleFirstInteraction = () => {
+      const el = audioRef.current;
+      if (el && el.paused) {
+        el.play().then(() => {
+          setIsPlaying(true);
+        }).catch(() => {});
+      }
+      window.removeEventListener("click", handleFirstInteraction, true);
+      window.removeEventListener("touchstart", handleFirstInteraction, true);
+      window.removeEventListener("keydown", handleFirstInteraction, true);
+      window.removeEventListener("scroll", handleFirstInteraction, true);
+    };
+
+    window.addEventListener("click", handleFirstInteraction, true);
+    window.addEventListener("touchstart", handleFirstInteraction, true);
+    window.addEventListener("keydown", handleFirstInteraction, true);
+    window.addEventListener("scroll", handleFirstInteraction, true);
+
+    return () => {
+      window.removeEventListener("click", handleFirstInteraction, true);
+      window.removeEventListener("touchstart", handleFirstInteraction, true);
+      window.removeEventListener("keydown", handleFirstInteraction, true);
+      window.removeEventListener("scroll", handleFirstInteraction, true);
+    };
+  }, [activeTrack.src]);
+
   // Handle Play / Pause Toggle
   const togglePlay = () => {
-    if (isPlaying) {
-      pauseAudio();
-    } else {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
       playAudio();
+    } else {
+      pauseAudio();
     }
-  };
-
-  const playAudio = () => {
-    if (activeTrack.isSynth) {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-      startSynthLoop();
-      setIsPlaying(true);
-    } else if (activeTrack.src) {
-      stopSynthLoop();
-      if (!audioRef.current) {
-        audioRef.current = new Audio(activeTrack.src);
-      } else if (audioRef.current.src !== activeTrack.src) {
-        audioRef.current.src = activeTrack.src;
-      }
-      audioRef.current.volume = isMuted ? 0 : volume;
-      audioRef.current.loop = isLooping;
-
-      audioRef.current
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {
-          // Autoplay policy or CORS error -> fallback to synth
-          startSynthLoop();
-          setIsPlaying(true);
-        });
-    }
-  };
-
-  const pauseAudio = () => {
-    if (activeTrack.isSynth) {
-      stopSynthLoop();
-    } else if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    setIsPlaying(false);
   };
 
   // Switch Track
@@ -444,6 +407,16 @@ export const AudioPlayer: React.FC = () => {
 
   return (
     <div className="relative inline-flex items-center gap-1.5">
+      {/* Hidden HTML5 Audio Element for reliable playback */}
+      <audio
+        ref={audioRef}
+        src={activeTrack.src}
+        preload="auto"
+        loop={isLooping}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+
       {/* 1. Quick Navbar Play / Pause Button with Equalizer animation */}
       <button
         onClick={togglePlay}
@@ -552,7 +525,7 @@ export const AudioPlayer: React.FC = () => {
                     </span>
                   </div>
                   <span className="text-[11px] text-[#713F5B] px-2 py-0.5 rounded-full bg-white/70 border border-[#FCE7ED]">
-                    {activeTrack.isSynth ? "Web Audio Synth" : "MP3 Audio"}
+                    MP3 Audio
                   </span>
                 </div>
 
@@ -564,22 +537,20 @@ export const AudioPlayer: React.FC = () => {
                 </p>
 
                 {/* Scrubber Progress Bar for MP3 */}
-                {!activeTrack.isSynth && (
-                  <div className="mb-4">
-                    <input
-                      type="range"
-                      min={0}
-                      max={duration || 100}
-                      value={currentTime}
-                      onChange={handleSeek}
-                      className="w-full h-1.5 bg-[#F9CAD8] rounded-lg appearance-none cursor-pointer accent-[#D13F72]"
-                    />
-                    <div className="flex justify-between text-[10px] text-[#713F5B] mt-1 font-mono">
-                      <span>{formatTime(currentTime)}</span>
-                      <span>{formatTime(duration)}</span>
-                    </div>
+                <div className="mb-4">
+                  <input
+                    type="range"
+                    min={0}
+                    max={duration || 100}
+                    value={currentTime}
+                    onChange={handleSeek}
+                    className="w-full h-1.5 bg-[#F9CAD8] rounded-lg appearance-none cursor-pointer accent-[#D13F72]"
+                  />
+                  <div className="flex justify-between text-[10px] text-[#713F5B] mt-1 font-mono">
+                    <span>{formatTime(currentTime)}</span>
+                    <span>{formatTime(duration)}</span>
                   </div>
-                )}
+                </div>
 
                 {/* Primary Player Controls */}
                 <div className="flex items-center justify-between pt-1">
