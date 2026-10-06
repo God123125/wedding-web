@@ -44,7 +44,7 @@ const PRESET_TRACKS: AudioTrack[] = [
 
 export const AudioPlayer: React.FC = () => {
   const { t, language } = useLanguage();
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTrackId, setSelectedTrackId] =
     useState<string>("fixed-default-song");
@@ -170,45 +170,58 @@ export const AudioPlayer: React.FC = () => {
     }
   }, [volume, isMuted, isLooping]);
 
-  // Attempt autoplay on mount and retry on any first user interaction (click/touch/scroll/keypress)
+  // Attempt autoplay on mount and unlock playback on first user gesture anywhere
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio && activeTrack.src) {
-      if (!audio.src || !audio.src.endsWith(activeTrack.src)) {
-        audio.src = activeTrack.src;
-      }
-      audio.volume = isMuted ? 0 : volume;
-      audio.loop = isLooping;
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        setIsPlaying(false);
-      });
+    if (!audio || !activeTrack.src) return;
+
+    if (!audio.src || !audio.src.endsWith(activeTrack.src)) {
+      audio.src = activeTrack.src;
+    }
+    audio.volume = isMuted ? 0 : volume;
+    audio.loop = isLooping;
+
+    // Try direct autoplay
+    const promise = audio.play();
+    if (promise !== undefined) {
+      promise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          setIsPlaying(false);
+        });
     }
 
-    const handleFirstInteraction = () => {
+    // Fallback: Unlock and start playing on the very first touch/click/scroll interaction
+    const unlockAndPlay = () => {
       const el = audioRef.current;
       if (el && el.paused) {
-        el.play().then(() => {
-          setIsPlaying(true);
-        }).catch(() => {});
+        el.play()
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {});
       }
-      window.removeEventListener("click", handleFirstInteraction, true);
-      window.removeEventListener("touchstart", handleFirstInteraction, true);
-      window.removeEventListener("keydown", handleFirstInteraction, true);
-      window.removeEventListener("scroll", handleFirstInteraction, true);
+      removeListeners();
     };
 
-    window.addEventListener("click", handleFirstInteraction, true);
-    window.addEventListener("touchstart", handleFirstInteraction, true);
-    window.addEventListener("keydown", handleFirstInteraction, true);
-    window.addEventListener("scroll", handleFirstInteraction, true);
+    const removeListeners = () => {
+      document.removeEventListener("click", unlockAndPlay, { capture: true });
+      document.removeEventListener("touchstart", unlockAndPlay, { capture: true });
+      document.removeEventListener("pointerdown", unlockAndPlay, { capture: true });
+      document.removeEventListener("keydown", unlockAndPlay, { capture: true });
+      window.removeEventListener("scroll", unlockAndPlay, { capture: true } as any);
+    };
+
+    document.addEventListener("click", unlockAndPlay, { capture: true, once: true });
+    document.addEventListener("touchstart", unlockAndPlay, { capture: true, once: true });
+    document.addEventListener("pointerdown", unlockAndPlay, { capture: true, once: true });
+    document.addEventListener("keydown", unlockAndPlay, { capture: true, once: true });
+    window.addEventListener("scroll", unlockAndPlay, { capture: true, once: true } as any);
 
     return () => {
-      window.removeEventListener("click", handleFirstInteraction, true);
-      window.removeEventListener("touchstart", handleFirstInteraction, true);
-      window.removeEventListener("keydown", handleFirstInteraction, true);
-      window.removeEventListener("scroll", handleFirstInteraction, true);
+      removeListeners();
     };
   }, [activeTrack.src]);
 
