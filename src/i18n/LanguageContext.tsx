@@ -24,7 +24,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch {
       // fallback
     }
-    return "en";
+    return "km";
   });
 
   const setLanguage = (lang: Language) => {
@@ -42,11 +42,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     document.documentElement.lang = language;
-    if (language === "km") {
-      document.body.classList.add("font-khmer");
-    } else {
-      document.body.classList.remove("font-khmer");
-    }
+    document.body.classList.add("font-khmer");
+    // if (language === "km") {
+    //   document.body.classList.add("font-khmer");
+    // } else {
+    //   document.body.classList.remove("font-khmer");
+    // }
   }, [language]);
 
   const value = {

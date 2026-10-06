@@ -89,23 +89,23 @@ function WeddingAppContent() {
       <div className="fixed bottom-4 right-4 z-40 flex items-center gap-2">
         <LanguageToggle variant="floating" />
 
-        <button
+        {/* <button
           onClick={() => setIsCustomizerOpen(true)}
           className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 backdrop-blur-md border border-[#FCE7ED] shadow-sm hover:shadow-md text-[#9D174D] hover:text-[#831843] hover:bg-white transition-all text-xs font-medium active:scale-95 group"
           title={t.customizer.title}
         >
           <SlidersHorizontal className="w-3.5 h-3.5 text-[#D13F72] group-hover:rotate-45 transition-transform" />
           <span className="hidden sm:inline">{t.nav.customize}</span>
-        </button>
+        </button> */}
       </div>
 
       {/* Customize Drawer Modal */}
-      <CustomizeDrawer
+      {/* <CustomizeDrawer
         isOpen={isCustomizerOpen}
         onClose={() => setIsCustomizerOpen(false)}
         couple={couple}
         onUpdateCouple={setCouple}
-      />
+      /> */}
     </div>
   );
 }
