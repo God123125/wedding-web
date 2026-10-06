@@ -135,7 +135,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-base font-serif text-[#4A2033] hover:text-[#9D174D] py-2 border-b border-[#FCE7ED]/50 transition-colors"
+                className="text-base font-khmer text-[#4A2033] hover:text-[#9D174D] py-2 border-b border-[#FCE7ED]/50 transition-colors"
               >
                 {link.label}
               </a>
@@ -144,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="pt-2 flex flex-col items-center gap-3">
               <LanguageToggle />
 
-              {onOpenCustomizer && (
+              {/* {onOpenCustomizer && (
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -155,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <Settings2 className="w-3.5 h-3.5" />
                   {t.nav.customize}
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         </div>

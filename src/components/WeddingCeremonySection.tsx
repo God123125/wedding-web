@@ -127,8 +127,8 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
             </div>
 
             {/* Right: Stylized Venue / Map Representation */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-[#FCE7ED] shadow-sm bg-white aspect-[4/3] flex flex-col items-center justify-center p-6 text-center group">
+            <div className="lg:col-span-5 w-full">
+              <div className="relative rounded-2xl overflow-hidden border border-[#FCE7ED] shadow-sm bg-white min-h-[320px] md:aspect-[4/3] flex flex-col items-center justify-center p-4 sm:p-6 text-center group w-full">
                 {/* Dotted background */}
                 <div
                   className="absolute inset-0 opacity-20 pointer-events-none"
@@ -140,44 +140,44 @@ export const WeddingCeremonySection: React.FC<WeddingCeremonySectionProps> = ({
                 />
 
                 {/* Content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="w-14 h-14 rounded-full bg-[#FFF0F4] border border-[#F9CAD8] shadow-xs flex items-center justify-center text-[#D13F72] mb-3 group-hover:scale-110 transition-transform">
-                    <MapPin className="w-6 h-6 fill-current animate-bounce" />
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#FFF0F4] border border-[#F9CAD8] shadow-xs flex items-center justify-center text-[#D13F72] mb-3 group-hover:scale-110 transition-transform">
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 fill-current animate-bounce" />
                   </div>
 
-                  <h4 className="free-hand text-xl text-[#2D1522] font-medium mb-1">
+                  <h4 className="free-hand text-lg sm:text-xl text-[#2D1522] font-medium mb-1">
                     {t.hero.venue}
                   </h4>
-                  <p className="text-xl text-[#713F5B] max-w-xs mb-4">
+                  <p className="text-sm sm:text-base text-[#713F5B] max-w-xs mb-4 px-2">
                     {t.hero.address}
                   </p>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto px-2">
                     <button
                       onClick={handleOpenMap}
-                      className="px-6 py-3 rounded-full cursor-pointer text-2xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] shadow-xs hover:shadow-md transition-all flex items-center gap-2"
+                      className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full cursor-pointer text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-[#D13F72] to-[#BE185D] hover:from-[#BE185D] hover:to-[#9D174D] shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2"
                     >
-                      <Navigation className="w-3.5 h-3.5" />
+                      <Navigation className="w-3.5 h-3.5 shrink-0" />
                       <span>{t.ceremony.getDirections}</span>
-                      <ExternalLink className="w-3 h-3 opacity-80" />
+                      <ExternalLink className="w-3 h-3 opacity-80 shrink-0" />
                     </button>
 
                     <button
                       onClick={handleCopyAddress}
-                      className="px-5 py-3 rounded-full text-2xs font-medium tracking-wide text-[#713F5B] bg-white hover:bg-[#FFF9FA] border border-[#FCE7ED] transition-colors flex items-center gap-2"
+                      className="px-4 sm:px-5 py-2.5 sm:py-3 rounded-full text-xs font-medium tracking-wide text-[#713F5B] bg-white hover:bg-[#FFF9FA] border border-[#FCE7ED] transition-colors flex items-center justify-center gap-2 cursor-pointer"
                     >
                       {copiedAddress ? (
                         <>
-                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                           <span className="text-emerald-700">
                             {t.ceremony.addressCopied}
                           </span>
                         </>
                       ) : (
                         <>
-                          <Copy className="w-3.5 h-3.5 text-[#D13F72]" />
-                          <span className="cursor-pointer">
+                          <Copy className="w-3.5 h-3.5 text-[#D13F72] shrink-0" />
+                          <span>
                             {t.ceremony.copyAddress}
                           </span>
                         </>

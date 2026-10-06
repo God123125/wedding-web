@@ -67,9 +67,6 @@ function WeddingAppContent() {
       {/* Love Story Timeline */}
       <LoveStoryTimeline milestones={milestones} />
 
-      {/* The Wedding Ceremony Section */}
-      <WeddingCeremonySection couple={couple} />
-
       {/* Order of Events Cards */}
       <EventDetails events={events} />
 
@@ -81,6 +78,8 @@ function WeddingAppContent() {
 
       {/* Wedding Gift & Registry */}
       {/* <WeddingGiftSection gift={gift} /> */}
+      {/* The Wedding Ceremony Section */}
+      <WeddingCeremonySection couple={couple} />
 
       {/* Closing Section */}
       <ClosingSection couple={couple} />
