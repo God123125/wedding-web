@@ -53,7 +53,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
               </div>
             </div>
 
-            <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
+            <span className="text-xl uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
               {language === "km" ? t.couple.groomBadge : couple.groomTitle}
             </span>
             <h3 className="free-hand text-3xl text-[#2D1522] mb-3 font-medium">
@@ -99,7 +99,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ couple }) => {
               </div>
             </div>
 
-            <span className="text-xs uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
+            <span className="text-xl uppercase tracking-widest text-[#9D174D] font-semibold mb-1">
               {language === "km" ? t.couple.brideBadge : couple.brideTitle}
             </span>
             <h3 className="free-hand text-3xl text-[#2D1522] mb-3 font-medium">
