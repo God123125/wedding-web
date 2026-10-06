@@ -134,7 +134,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
         </div>
 
         {/* Filter Tabs (Interactive Segmented Control compliant with Section 1.A) */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 bg-white/80 rounded-full border border-[#FCE7ED] max-w-md mx-auto mb-12 shadow-2xs">
+        {/* <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 bg-white/80 rounded-full border border-[#FCE7ED] max-w-md mx-auto mb-12 shadow-2xs">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -148,7 +148,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               {cat.label}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -187,7 +187,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                         <Eye className="w-3.5 h-3.5" />
                         Click to enlarge
                       </span>
-                      <button
+                      {/* <button
                         onClick={(e) => handleLike(e, photo.id)}
                         className="p-1.5 rounded-full bg-white/20 hover:bg-white/40 transition-colors flex items-center gap-1 text-xs"
                       >
@@ -199,7 +199,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                           }`}
                         />
                         <span>{photo.likes}</span>
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -209,7 +209,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                   <span className="font-serif text-sm font-medium text-[#2D1522] truncate pr-2">
                     {photo.title}
                   </span>
-                  <button
+                  {/* <button
                     onClick={(e) => handleLike(e, photo.id)}
                     className="flex items-center gap-1 text-xs text-[#713F5B] hover:text-[#D13F72] transition-colors shrink-0"
                     title="Like this photo"
@@ -224,7 +224,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                     <span className="tabular-nums text-[11px]">
                       {photo.likes}
                     </span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             );
@@ -302,7 +302,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               </div>
 
               <div className="flex items-center gap-3">
-                <button
+                {/* <button
                   onClick={(e) => handleLike(e, activePhoto.id)}
                   className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-white flex items-center gap-1.5 transition-colors"
                 >
@@ -314,7 +314,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                     }`}
                   />
                   <span className="tabular-nums">{activePhoto.likes}</span>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

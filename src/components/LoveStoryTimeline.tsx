@@ -244,9 +244,9 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
           <span className="font-script text-3xl sm:text-4xl text-[#D13F72] block mb-1">
             {t.story.badge}
           </span>
-          <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
+          {/* <h2 className="font-serif text-4xl sm:text-5xl text-[#2D1522] tracking-tight font-normal">
             {t.story.heading}
-          </h2>
+          </h2> */}
 
           {/* Triple Heart Divider */}
           <div className="flex items-center justify-center gap-2 my-4">
@@ -257,9 +257,9 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
             <span className="w-12 h-[1.5px] bg-gradient-to-l from-transparent to-[#E8B4C4]" />
           </div>
 
-          <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
+          {/* <p className="text-sm sm:text-base text-[#713F5B] leading-relaxed">
             {t.story.subheading}
-          </p>
+          </p> */}
         </div>
 
         {/* Timeline Container */}
