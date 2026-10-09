@@ -172,7 +172,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
                   {/* Gradient Hover Scrim */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 text-white">
-                    <span className="text-xs uppercase tracking-widest text-[#F9CAD8] font-semibold mb-1">
+                    {/* <span className="text-xs uppercase tracking-widest text-[#F9CAD8] font-semibold mb-1">
                       {photo.category}
                     </span>
                     <h4 className="font-serif text-xl font-medium mb-1">
@@ -180,7 +180,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                     </h4>
                     <p className="text-xs text-white/90 line-clamp-2 font-light">
                       {photo.caption}
-                    </p>
+                    </p> */}
 
                     <div className="mt-3 flex items-center justify-between pt-2 border-t border-white/20">
                       <span className="text-[11px] text-white/80 flex items-center gap-1">
@@ -205,11 +205,11 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                 </div>
 
                 {/* Always-visible quiet caption bar */}
-                <div className="p-4 bg-white flex items-center justify-between border-t border-[#FCE7ED]/40">
+                {/* <div className="p-4 bg-white flex items-center justify-between border-t border-[#FCE7ED]/40">
                   <span className="font-serif text-sm font-medium text-[#2D1522] truncate pr-2">
                     {photo.title}
                   </span>
-                  {/* <button
+                  <button
                     onClick={(e) => handleLike(e, photo.id)}
                     className="flex items-center gap-1 text-xs text-[#713F5B] hover:text-[#D13F72] transition-colors shrink-0"
                     title="Like this photo"
@@ -224,8 +224,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                     <span className="tabular-nums text-[11px]">
                       {photo.likes}
                     </span>
-                  </button> */}
-                </div>
+                  </button>
+                </div> */}
               </div>
             );
           })}
@@ -288,7 +288,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               />
             </div>
 
-            <div className="w-full p-6 bg-gradient-to-t from-[#1A0E15] to-[#25141E] text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            {/* <div className="w-full p-6 bg-gradient-to-t from-[#1A0E15] to-[#25141E] text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <span className="text-[11px] uppercase tracking-widest text-[#F9CAD8] font-medium">
                   {activePhoto.category}
@@ -302,7 +302,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               </div>
 
               <div className="flex items-center gap-3">
-                {/* <button
+                <button
                   onClick={(e) => handleLike(e, activePhoto.id)}
                   className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-white flex items-center gap-1.5 transition-colors"
                 >
@@ -314,9 +314,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                     }`}
                   />
                   <span className="tabular-nums">{activePhoto.likes}</span>
-                </button> */}
+                </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

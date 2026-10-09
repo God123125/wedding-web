@@ -32,12 +32,12 @@ export const SafeImage: React.FC<SafeImageProps> = ({
           <div className="w-12 h-12 rounded-full bg-white/80 shadow-xs flex items-center justify-center text-[#D13F72] mb-3">
             <Heart className="w-6 h-6 fill-current animate-pulse-gentle" />
           </div>
-          <span className="font-serif text-lg font-medium text-[#4A2033] tracking-wide">
+          {/* <span className="font-serif text-lg font-medium text-[#4A2033] tracking-wide">
             {fallbackTitle}
           </span>
           <span className="text-xs text-[#831843]/70 font-sans tracking-widest uppercase mt-1">
             {fallbackSubtitle}
-          </span>
+          </span> */}
         </div>
       </div>
     );

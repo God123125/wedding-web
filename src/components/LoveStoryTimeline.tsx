@@ -304,22 +304,23 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
 
                       {/* Photo if present */}
                       {item.image && (
-                        <div className="relative w-full h-52 sm:h-64 rounded-2xl overflow-hidden mb-6 shadow-xs">
+                        <div className="relative w-full h-80 sm:h-64 rounded-2xl overflow-hidden mb-6 shadow-xs">
                           <SafeImage
                             src={item.image}
                             alt={item.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
                             fallbackTitle={item.title}
                             fallbackSubtitle={item.date}
+                            containerClassName="w-full h-full"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
 
                           {/* Floating heart badge on photo corner */}
                           <div className="absolute top-3 right-3 px-2.5 py-1.5 rounded-full bg-white/90 backdrop-blur-xs text-[#D13F72] shadow-sm flex items-center gap-1.5 border border-[#FCE7ED]">
                             <Heart className="w-3.5 h-3.5 fill-[#D13F72] animate-pulse-gentle" />
-                            <span className="text-[10px] font-semibold tracking-wider text-[#9D174D]">
+                            {/* <span className="text-[10px] font-semibold tracking-wider text-[#9D174D]">
                               CHAPTER {index + 1}
-                            </span>
+                            </span> */}
                           </div>
 
                           {/* Bottom-left photo heart flourish */}
@@ -336,7 +337,7 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
                       <div className="flex flex-wrap items-center gap-2 text-xs text-[#9D174D] font-medium tracking-wider uppercase mb-2.5">
                         <span className="flex items-center gap-1">
                           <Heart className="w-3 h-3 fill-[#D13F72] text-[#D13F72] inline" />
-                          <span>{item.date}</span>
+                          <span>{item.title}</span>
                         </span>
                         {item.location && (
                           <>
@@ -360,9 +361,9 @@ export const LoveStoryTimeline: React.FC<LoveStoryTimelineProps> = ({
                         </div>
                       </h3>
 
-                      <p className="text-sm text-[#5F354A] leading-relaxed font-light mb-4">
+                      {/* <p className="text-sm text-[#5F354A] leading-relaxed font-light mb-4">
                         {item.description}
-                      </p>
+                      </p> */}
 
                       {/* Delicate Card Bottom Flourish with 3 Heart Beads */}
                       <div className="pt-3 border-t border-[#FCE7ED]/70 flex items-center justify-between text-[11px] text-[#A07086]">

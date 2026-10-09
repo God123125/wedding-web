@@ -203,7 +203,7 @@ export const translations: Record<Language, Translations> = {
     hero: {
       tagline: "We're Getting Married!",
       quote: '"A 100 years old friendship"',
-      loveStoryBtn: "Our Love Story",
+      loveStoryBtn: "Our Memories Moment",
       saveTheDateBtn: "Save The Date",
       countdownTitle: "Counting down to our special day",
       days: "Days",
@@ -230,31 +230,31 @@ export const translations: Record<Language, Translations> = {
       heading: "Our Love Journey",
       subheading:
         "Every love story is beautiful, but ours is our absolute favorite. Here are the unforgettable chapters that brought us to forever.",
-      milestone1Title: "The First Meeting",
+      milestone1Title: "ធ្វើបុណ្យជាមួយគ្នា",
       milestone1Desc:
         "The day our paths crossed and everything began. A serendipitous encounter on a rainy Tuesday morning at a small bookstore cafe on Bleecker Street, reaching for the exact same art biography.",
       milestone1Date: "Autumn 2021",
-      milestone1Loc: "New York City",
-      milestone2Title: "Our First Date",
+      milestone1Loc: "វត្តស្ងួនពេជ្រ",
+      milestone2Title: "ដំណើរកំសាន្ត",
       milestone2Desc:
         "Dinner turned into hours of walking under city lights, sharing childhood dreams, favorite records, and realizing neither of us wanted the night to end.",
       milestone2Date: "Winter 2021",
-      milestone2Loc: "Brooklyn Promenade",
-      milestone3Title: "Falling in Love",
+      milestone2Loc: "កំពត",
+      milestone3Title: "ដំណើរកំសាន្ត",
       milestone3Desc:
         "A summer road trip through the coast where silence felt comfortable, laughter came easily, and we realized home wasn’t a place, but each other.",
       milestone3Date: "Summer 2022",
-      milestone3Loc: "Big Sur, California",
-      milestone4Title: "The Proposal",
+      milestone3Loc: "កំពត",
+      milestone4Title: "ដំណើរកំសាន្ត",
       milestone4Desc:
         "At sunset overlooking the ocean on a crisp autumn evening, with our favorite song playing quietly and tears of joy, Julian got down on one knee.",
       milestone4Date: "Autumn 2023",
-      milestone4Loc: "Newport, Rhode Island",
-      milestone5Title: "Our Wedding Day",
+      milestone4Loc: "កំពត",
+      milestone5Title: "ឆ្លងឆ្នាំជាមួយគ្នា",
       milestone5Desc:
         "Surrounded by our dearest family and friends, we make our forever promise to love, cherish, and grow old together hand in hand.",
       milestone5Date: "Summer 2026",
-      milestone5Loc: "Savannah, Georgia",
+      milestone5Loc: "មុខវាំង",
       closingFlourish: "And our next chapter begins with you",
     },
     ceremony: {
@@ -295,7 +295,7 @@ export const translations: Record<Language, Translations> = {
     },
     gallery: {
       badge: "Cherished Memories",
-      heading: "Our Captured Moments",
+      heading: "Our Pre-Wedding Moments",
       subheading:
         "A glimpse into our favorite adventures, quiet smiles, and tender moments leading up to this special day.",
       all: "All Moments",
@@ -409,9 +409,9 @@ export const translations: Record<Language, Translations> = {
       customize: "កែសម្រួល",
     },
     hero: {
-      tagline: "យើងរៀបអាពាហ៍ពិពាហ៍ហើយ!",
+      tagline: "ពួកយើងជិតរៀបអាពាហ៍ពិពាហ៍ហើយ!",
       quote: "«មិត្ត ១០០ ឆ្នាំ»",
-      loveStoryBtn: "រឿងរ៉ាវស្នេហារបស់យើង",
+      loveStoryBtn: "កម្រងអនុស្សាវរីយ៍របស់ពួកយើង",
       saveTheDateBtn: "កត់ត្រាកាលបរិច្ឆេទ",
       countdownTitle: "រាប់ថយក្រោយឆ្ពោះទៅកាន់ថ្ងៃពិសេសរបស់ពួកយើង",
       days: "ថ្ងៃ",
@@ -438,31 +438,31 @@ export const translations: Record<Language, Translations> = {
       heading: "រឿងរ៉ាវស្នេហារបស់យើង",
       subheading:
         "រឿងរ៉ាវស្នេហាទាំងអស់សុទ្ធតែស្រស់ស្អាត ប៉ុន្តែរឿងរ៉ាវរបស់យើងគឺជាអ្វីដែលយើងស្រឡាញ់បំផុត។ នេះជាអនុស្សាវរីយ៍ដែលនាំយើងមករកថ្ងៃនេះ។",
-      milestone1Title: "ការជួបគ្នាលើកដំបូង",
+      milestone1Title: "ធ្វើបុណ្យជាមួយគ្នា",
       milestone1Desc:
         "ថ្ងៃដែលវាសនាបាននាំផ្លូវយើងឱ្យប្រសព្វគ្នា។ នៅក្នុងហាងកាហ្វេ និងសៀវភៅតូចមួយនៅព្រឹកថ្ងៃអង្គារមានភ្លៀងធ្លាក់ស្រិចៗ ពេលដែលដៃយើងទាំងពីរចាប់យកសៀវភៅសិល្បៈដូចគ្នា។",
-      milestone1Date: "រដូវស្លឹកឈើជ្រុះ ឆ្នាំ២០២១",
-      milestone1Loc: "ទីក្រុងញូវយ៉ក",
-      milestone2Title: "ការណាត់ជួបលើកដំបូង",
+      milestone1Date: "ធ្វើបុណ្យជាមួយគ្នា",
+      milestone1Loc: "វត្តស្ងួនពេជ្រ",
+      milestone2Title: "ដំណើរកំសាន្ត",
       milestone2Desc:
         "អាហារពេលល្ងាចបានក្លាយជាការដើរលេងក្រោមពន្លឺភ្លើងទីក្រុងជាច្រើនម៉ោង ចែករំលែកសុបិនកាលពីកុមារភាព និងបទចម្រៀងដែលចូលចិត្ត ដោយគ្មាននរណាចង់ឱ្យរាត្រីនោះបញ្ចប់ឡើយ។",
       milestone2Date: "រដូវរងា ឆ្នាំ២០២១",
-      milestone2Loc: "ប្រូមឺណាតប្រ៊ូកលីន",
-      milestone3Title: "លង់ស្នេហ៍យ៉ាងជ្រាលជ្រៅ",
+      milestone2Loc: "កំពត",
+      milestone3Title: "ដំណើរកំសាន្ត",
       milestone3Desc:
         "ដំណើរកម្សាន្តតាមឆ្នេរសមុទ្ររដូវក្តៅ ដែលភាពស្ងប់ស្ងាត់ពោរពេញដោយផាសុកភាព សំណើចកើតឡើងយ៉ាងងាយស្រួល ហើយយើងដឹងថា «ផ្ទះ» មិនមែនជាទីកន្លែងនោះទេ ប៉ុន្តែជាវត្តមានរបស់គ្នាទៅវិញទៅមក។",
       milestone3Date: "រដូវក្តៅ ឆ្នាំ២០២២",
-      milestone3Loc: "ប៊ីកស៊ើរ, រដ្ឋកាលីហ្វ័រញ៉ា",
-      milestone4Title: "ការសុំរៀបការ",
+      milestone3Loc: "កំពត",
+      milestone4Title: "ដំណើរកំសាន្ត",
       milestone4Desc:
         "នៅពេលថ្ងៃលិចលើផ្ទៃសមុទ្រនារដូវស្លឹកឈើជ្រុះដ៏ស្រស់បំព្រង ជាមួយនឹងបទចម្រៀងដែលយើងស្រឡាញ់ និងទឹកភ្នែកនៃក្តីរំភើប ជូលៀនបានលុតជង្គង់សុំក្លារ៉ារៀបការ។",
       milestone4Date: "រដូវស្លឹកឈើជ្រុះ ឆ្នាំ២០២៣",
-      milestone4Loc: "ញូវផត, រដ្ឋរ៉ូដអាយលែន",
-      milestone5Title: "ថ្ងៃមង្គលការរបស់យើង",
+      milestone4Loc: "កំពត",
+      milestone5Title: "ឆ្លងឆ្នាំជាមួយគ្នា",
       milestone5Desc:
         "ហ៊ុំព័ទ្ធដោយក្រុមគ្រួសារ និងមិត្តភក្តិជាទីស្រឡាញ់ យើងសច្ចាស្រឡាញ់ ថែរក្សា និងចាស់ជរាជាមួយគ្នាដោយក្តីស្មោះស្ម័គ្រអស់មួយជីវិត។",
       milestone5Date: "រដូវក្តៅ ឆ្នាំ២០២៦",
-      milestone5Loc: "សាវ៉ាណា, រដ្ឋហ្សកហ្ស៊ី",
+      milestone5Loc: "មុខវាំង",
       closingFlourish:
         "ហើយជំពូកបន្ទាប់នៃជីវិតយើង ចាប់ផ្តើមជាមួយវត្តមានរបស់អ្នក",
     },
@@ -504,7 +504,7 @@ export const translations: Record<Language, Translations> = {
     },
     gallery: {
       badge: "អនុស្សាវរីយ៍ដ៏មានតម្លៃ",
-      heading: "កម្រងរូបភាពអនុស្សាវរីយ៍",
+      heading: "កម្រងរូបភាពPre-Wedding",
       subheading:
         "ទិដ្ឋភាពនៃក្តីស្រឡាញ់ ស្នាមញញឹមដ៏កក់ក្តៅ និងពេលវេលាដ៏មានអត្ថន័យដែលនាំយើងមកកាន់ថ្ងៃមង្គលការនេះ។",
       all: "រូបភាពទាំងអស់",

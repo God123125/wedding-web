@@ -5,20 +5,31 @@ import {
   GalleryPhoto,
   GiftDetails,
 } from "../types/wedding";
-
+import groomImg from "../assets/groom.jpg";
+import brideImg from "../assets/bride.jpg";
+import preWedding1 from "../assets/pre-wedding1.jpg";
+import preWedding2 from "../assets/pre-wedding2.jpg";
+import preWedding3 from "../assets/pre-wedding3.jpg";
+import preWedding4 from "../assets/pre-wedding4.jpg";
+import preWedding5 from "../assets/pre-wedding5.jpg";
+import preWedding6 from "../assets/pre-wedding6.jpg";
+import mem1 from "../assets/memory1.jpg";
+import mem2 from "../assets/memory2.jpg";
+import mem3 from "../assets/memory3.jpg";
+import mem4 from "../assets/memory4.jpg";
+import mem5 from "../assets/memory5.jpg";
+import mem6 from "../assets/memory6.jpg";
 export const initialCoupleInfo: CoupleInfo = {
   groomName: "Julian Vance",
   groomTitle: "The Groom",
   groomBio:
     "An architect with a passion for timeless spaces, quiet mornings with pour-over coffee, and making Clara laugh until she cries. From the second we met, I knew our love was the masterpiece of my life.",
-  groomImage:
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+  groomImage: groomImg,
   brideName: "Clara Kensington",
   brideTitle: "The Bride",
   brideBio:
     "A landscape botanical artist who finds poetry in wildflower fields, acoustic vinyl records, and sunsets by the sea. Julian is my favorite sanctuary, my warmest home, and my greatest adventure.",
-  brideImage:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+  brideImage: brideImg,
   weddingDate: "2026-12-04T15:30:00",
   weddingTime: "Saturday, June 20, 2026 at 3:30 PM",
   venueName: "The Rosewood Glasshouse & Botanical Gardens",
@@ -33,52 +44,47 @@ export const initialMilestones: TimelineMilestone[] = [
   {
     id: "1",
     date: "Autumn 2021",
-    title: "The First Meeting",
+    title: "Pchum Ben Day",
     description:
       "The day our paths crossed and everything began. A serendipitous encounter on a rainy Tuesday morning at a small bookstore cafe on Bleecker Street, reaching for the exact same art biography.",
-    location: "New York City",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+    location: "Sgoun Pich Pagoda",
+    image: mem1,
   },
   {
     id: "2",
     date: "Spring 2022",
-    title: "Our First Date",
+    title: "Trip",
     description:
       "A simple date that became the beginning of something beautiful. Handcrafted pasta by candlelight, followed by a three-hour moonlit stroll along the Hudson waterfront talking about our dreams.",
-    location: "West Village, NY",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+    location: "Kampot",
+    image: mem2,
   },
   {
     id: "3",
     date: "Summer 2023",
-    title: "Falling in Love",
+    title: "Family Trip",
     description:
       "We discovered how special life could be together. Road-tripping along coastal cliffs, cooking chaotic dinners with too much garlic, and realizing neither of us ever wanted to imagine tomorrow without the other.",
-    location: "Big Sur, California",
-    image:
-      "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80",
+    location: "Kampot",
+    image: mem3,
   },
   {
     id: "4",
     date: "December 2024",
-    title: "The Proposal",
+    title: "Trip",
     description:
       "One question, one unforgettable moment, and a lifetime ahead. Surrounded by blooming wisteria on the sun-drenched cliffs of Amalfi at golden hour, Julian knelt with hands shaking and eyes shining.",
-    location: "Positano, Italy",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+    location: "Kampot",
+    image: mem4,
   },
   {
     id: "5",
     date: "June 20, 2026",
-    title: "Our Wedding Day",
+    title: "Countdown Together",
     description:
       "The beginning of our forever. Surrounded by our dearest family, cherished friends, and fragrant blush blossoms, we promise each other all of our tomorrows.",
-    location: "Savannah, Georgia",
-    image:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
+    location: "Royal Palace",
+    image: mem5,
   },
 ];
 
@@ -127,8 +133,7 @@ export const initialGallery: GalleryPhoto[] = [
     title: "Golden Sunset at Amalfi",
     category: "engagement",
     caption: 'Ten minutes after she whispered "Yes" to forever.',
-    imageUrl:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: preWedding1,
     likes: 124,
   },
   {
@@ -136,8 +141,7 @@ export const initialGallery: GalleryPhoto[] = [
     title: "Laughter by the Seaside",
     category: "travels",
     caption: "Chasing the tides in Positano, barefoot and completely in love.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: preWedding2,
     likes: 98,
   },
   {
@@ -145,8 +149,7 @@ export const initialGallery: GalleryPhoto[] = [
     title: "Lavender Fields of Provence",
     category: "travels",
     caption: "Lost among fragrant purple waves under the warm French sun.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: preWedding3,
     likes: 142,
   },
   {
@@ -155,8 +158,7 @@ export const initialGallery: GalleryPhoto[] = [
     category: "moments",
     caption:
       "Quiet moments writing our forever promises on handmade cotton paper.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: preWedding4,
     likes: 85,
   },
   {
@@ -164,8 +166,7 @@ export const initialGallery: GalleryPhoto[] = [
     title: "First Autumn In Our Garden",
     category: "moments",
     caption: "Planting our first rose bushes together on our new porch.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: preWedding5,
     likes: 110,
   },
   {
@@ -173,8 +174,7 @@ export const initialGallery: GalleryPhoto[] = [
     title: "Starlight Romance",
     category: "engagement",
     caption: "Under the glittering canopy of Savannah night stars.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: preWedding6,
     likes: 167,
   },
 ];

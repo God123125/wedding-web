@@ -170,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ couple }) => {
         <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
           <button
             onClick={() => scrollToSection("#story")}
-            className="px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-[#D13F72] via-[#BE185D] to-[#9D174D] shadow-md hover:shadow-lg hover:scale-102 active:scale-98 transition-all duration-300 flex items-center gap-2.5"
+            className="cursor-pointer px-8 py-3.5 rounded-full text-sm font-semibold tracking-wider text-white bg-gradient-to-r from-[#D13F72] via-[#BE185D] to-[#9D174D] shadow-md hover:shadow-lg hover:scale-102 active:scale-98 transition-all duration-300 flex items-center gap-2.5"
           >
             <Heart className="w-4 h-4 fill-white" />
             <span>{t.hero.loveStoryBtn}</span>
